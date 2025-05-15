@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class BgmManager : MonoBehaviour
 {
-    public static GameManager Instance { get; private set; }
+    public static BgmManager Instance { get; private set; }
 
     private AudioSource _bgmAudioSource;
 
@@ -22,12 +22,12 @@ public class GameManager : MonoBehaviour
 
         // Ensure this object is not destroyed when loading a new scene
         DontDestroyOnLoad(gameObject);
-
-        Initialize();
     }
 
     private void Start()
     {
+        _bgmAudioSource = GetComponent<AudioSource>();
+
         // Play background music
         if (_bgmAudioSource != null)
         {
@@ -40,10 +40,5 @@ public class GameManager : MonoBehaviour
     public void UpdateBgmVolume()
     {
         _bgmAudioSource.volume = SaveSystem.Load().SoundMusicEnabled ? 1f : 0;
-    }
-
-    private void Initialize()
-    {
-        _bgmAudioSource = GetComponent<AudioSource>();
     }
 }

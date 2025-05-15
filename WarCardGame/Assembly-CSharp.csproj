@@ -61,12 +61,12 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.48f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Game\GameManager.cs" />
+    <Compile Include="Assets\Scripts\MainMenu\BgmManager.cs" />
     <Compile Include="Assets\Scripts\SaveSystem\GameSaveData.cs" />
-    <Compile Include="Assets\Scripts\UI\MainMenu\MainMenuController.cs" />
-    <Compile Include="Assets\Scripts\UI\MainMenu\SceneLoader.cs" />
-    <Compile Include="Assets\Scripts\UI\MainMenu\SettingsController.cs" />
+    <Compile Include="Assets\Scripts\MainMenu\SceneLoader.cs" />
     <Compile Include="Assets\Scripts\SaveSystem\SaveSystem.cs" />
+    <Compile Include="Assets\Scripts\MainMenu\UI\MainMenuController.cs" />
+    <Compile Include="Assets\Scripts\MainMenu\UI\SettingsController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
