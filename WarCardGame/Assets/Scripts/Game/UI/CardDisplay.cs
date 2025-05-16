@@ -3,19 +3,19 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 using Cysharp.Threading.Tasks;
 using TMPro;
+using DG.Tweening;
 
 public class CardDisplay : MonoBehaviour
 {
     [SerializeField] private Image _cardImage;
     [SerializeField] private TextMeshProUGUI _cardFallbackText;
 
-
     private static Sprite _backImageSprite;
 
     public async UniTask<bool> SetCard(string imageUrl, string namedValue)
     {
         _cardFallbackText.gameObject.SetActive(false);
-        await LoadImageAsync(imageUrl, namedValue);
+        await ShowCardWithFlip(imageUrl, namedValue);
         return true;
     }
 
@@ -26,13 +26,19 @@ public class CardDisplay : MonoBehaviour
         return true;
     }
 
-    private async UniTask<bool> LoadImageAsync(string url, string namedValue)
+    private async UniTask<bool> ShowCardWithFlip(string url, string namedValue)
     {
+        SfxAudioManager.Instance.PlaySfxAudio(SfxAudioManager.Instance.CardFlipAudio);
+        
+        // Flip Out (scale to 0)
+        await FlipOutCard();
+
         using var request = UnityWebRequestTexture.GetTexture(url);
         await request.SendWebRequest();
 
         if (request.result != UnityWebRequest.Result.Success)
         {
+            await FlipInCard();
             _cardFallbackText.text = namedValue;
             _cardFallbackText.gameObject.SetActive(true);
             Debug.LogError($"Failed to load image from {url}: {request.error}");
@@ -45,8 +51,21 @@ public class CardDisplay : MonoBehaviour
             new Rect(0, 0, texture.width, texture.height),
             new Vector2(0.5f, 0.5f)
         );
-        
+
+        // Flip In
+        await FlipInCard();
+
         return true;
+    }
+
+    private async UniTask FlipInCard()
+    {
+        await _cardImage.transform.DOScaleX(1f, 0.1f).AsyncWaitForCompletion();
+    }
+
+    private async UniTask FlipOutCard()
+    {
+        await _cardImage.transform.DOScaleX(0f, 0.15f).AsyncWaitForCompletion();
     }
 
     private async UniTask<bool> LoadCardBackImageAsync()

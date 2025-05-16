@@ -16,8 +16,18 @@ public class ResultUi : MonoBehaviour
 
     private void Start()
     {
-        _resultText.text = PlayerPrefs.GetString("GameResult", "Game Over");
+        var gameResult = (GameResult)PlayerPrefs.GetInt("GameResult");
+        _resultText.text = gameResult == GameResult.PlayerWins ? "You Win!" : "You Lose!";
         _mainMenuButton.onClick.AddListener(() => BackToMenu());
+
+        if(gameResult == GameResult.PlayerWins )
+        {
+            SfxAudioManager.Instance.PlaySfxAudio(SfxAudioManager.Instance.VictoryAudio);
+        }
+        else
+        {
+            SfxAudioManager.Instance.PlaySfxAudio(SfxAudioManager.Instance.GameOverLoseAudio);
+        }
     }
 
     public void BackToMenu()

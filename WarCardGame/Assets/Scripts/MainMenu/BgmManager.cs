@@ -39,6 +39,6 @@ public class BgmManager : MonoBehaviour
 
     public void UpdateBgmVolume()
     {
-        _bgmAudioSource.volume = SaveSystem.Load().SoundMusicEnabled ? 1f : 0;
+        _bgmAudioSource.volume = SaveSystem.Load().SoundMusicEnabled ? 1 : 0;
     }
 }

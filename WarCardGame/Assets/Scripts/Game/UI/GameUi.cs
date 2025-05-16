@@ -172,9 +172,9 @@ public class GameUi : MonoBehaviour
         _botAwardText.gameObject.SetActive(false);
     }
 
-    private void EndGame(string resultMessage)
+    private void EndGame(GameResult gameResult)
     {
-        PlayerPrefs.SetString("GameResult", resultMessage);
+        PlayerPrefs.SetInt("GameResult", (int)gameResult);
         _sceneLoader.LoadTargetScene("Result");
     }
 

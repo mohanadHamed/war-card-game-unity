@@ -1,5 +1,6 @@
 using System;
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 
 public class GameManager
 {
@@ -8,7 +9,7 @@ public class GameManager
     public event Func<Card, UniTask> OnBotCardReadyAsync;
     public event Func<string, UniTask<NetworkNotifyResponse>> OnNetworkIssueNotifyAsync;
 
-    public event Action<string> OnGameEnded;
+    public event Action<GameResult> OnGameEnded;
     public event Action OnQuitToMainMenu;
     public event Action OnGameStarted;
     public event Action<RoundResult> OnShowAwardLabels;
@@ -90,11 +91,13 @@ public class GameManager
         {
             _playerScore++;
             result = RoundResult.PlayerWins;
+            SfxAudioManager.Instance.PlaySfxAudio(SfxAudioManager.Instance.WinAudio);
         }
         else if (playerCard.Value < botCard.Value)
         {
             _botScore++;
             result = RoundResult.BotWins;
+            SfxAudioManager.Instance.PlaySfxAudio(SfxAudioManager.Instance.LoseAudio);
         }
         else
         {
@@ -136,12 +139,12 @@ public class GameManager
         if (_playerScore == ScoreToWin)
         {
             await UniTask.Delay(DelayToLoadGameOverMs);
-            OnGameEnded?.Invoke("Player Wins!");
+            OnGameEnded?.Invoke(GameResult.PlayerWins);
         }
         else if (_botScore == ScoreToWin)
         {
             await UniTask.Delay(DelayToLoadGameOverMs);
-            OnGameEnded?.Invoke("Bot Wins!");
+            OnGameEnded?.Invoke(GameResult.BotWins);
         }
     }
 }
