@@ -292,7 +292,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0, g: 0.21509439, b: 0.21509439, a: 1}
+  m_BackGroundColor: {r: 0.007843138, g: 0.14509805, b: 0.20784314, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -603,7 +603,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.21568628, b: 0.21568628, a: 1}
+  m_Color: {r: 0.007843138, g: 0.14509805, b: 0.20784314, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -887,7 +887,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0.036186695, a: 1}
+  m_Color: {r: 0.18039216, g: 0.5176471, b: 0.67058825, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1341,7 +1341,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04c76ef2f91adf749a73896cfaa9528c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sceneTransitionDurationInSeconds: 1
   _loadingBar: {fileID: 1484271741}
 --- !u!4 &1321143017
 Transform:
@@ -1640,15 +1639,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8193594396234256075, guid: 61814b15fe045a84ba513c7ebca840ff, type: 3}
       propertyPath: m_Color.b
-      value: 0.7528669
+      value: 0.67058825
       objectReference: {fileID: 0}
     - target: {fileID: 8193594396234256075, guid: 61814b15fe045a84ba513c7ebca840ff, type: 3}
       propertyPath: m_Color.g
-      value: 1
+      value: 0.5176471
       objectReference: {fileID: 0}
     - target: {fileID: 8193594396234256075, guid: 61814b15fe045a84ba513c7ebca840ff, type: 3}
       propertyPath: m_Color.r
-      value: 0.7075472
+      value: 0.18039216
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1895,7 +1894,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.21568628, b: 0.21568628, a: 1}
+  m_Color: {r: 0.007843138, g: 0.14509805, b: 0.20784314, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2166,15 +2165,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8193594396234256075, guid: 61814b15fe045a84ba513c7ebca840ff, type: 3}
       propertyPath: m_Color.b
-      value: 0.7529412
+      value: 0.67058825
       objectReference: {fileID: 0}
     - target: {fileID: 8193594396234256075, guid: 61814b15fe045a84ba513c7ebca840ff, type: 3}
       propertyPath: m_Color.g
-      value: 1
+      value: 0.5176471
       objectReference: {fileID: 0}
     - target: {fileID: 8193594396234256075, guid: 61814b15fe045a84ba513c7ebca840ff, type: 3}
       propertyPath: m_Color.r
-      value: 0.7058824
+      value: 0.18039216
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2585,15 +2584,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8193594396234256075, guid: 61814b15fe045a84ba513c7ebca840ff, type: 3}
       propertyPath: m_Color.b
-      value: 0.7528669
+      value: 0.67058825
       objectReference: {fileID: 0}
     - target: {fileID: 8193594396234256075, guid: 61814b15fe045a84ba513c7ebca840ff, type: 3}
       propertyPath: m_Color.g
-      value: 1
+      value: 0.5176471
       objectReference: {fileID: 0}
     - target: {fileID: 8193594396234256075, guid: 61814b15fe045a84ba513c7ebca840ff, type: 3}
       propertyPath: m_Color.r
-      value: 0.7075472
+      value: 0.18039216
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

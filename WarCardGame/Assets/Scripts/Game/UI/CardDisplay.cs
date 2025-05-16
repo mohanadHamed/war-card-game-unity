@@ -2,32 +2,42 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using Cysharp.Threading.Tasks;
+using TMPro;
 
 public class CardDisplay : MonoBehaviour
 {
-    [SerializeField] private Image cardImage;
+    [SerializeField] private Image _cardImage;
+    [SerializeField] private TextMeshProUGUI _cardFallbackText;
 
-    public void SetCard(string imageUrl)
+    public async UniTask<bool> SetCard(string imageUrl, string namedValue)
     {
-        LoadImageAsync(imageUrl).Forget(); // fire-and-forget since it's non-blocking
+        _cardFallbackText.gameObject.SetActive(false);
+        _cardImage.gameObject.SetActive(false);
+        await LoadImageAsync(imageUrl, namedValue);
+        return true;
     }
 
-    private async UniTaskVoid LoadImageAsync(string url)
+    private async UniTask<bool> LoadImageAsync(string url, string namedValue)
     {
         using var request = UnityWebRequestTexture.GetTexture(url);
         await request.SendWebRequest();
 
         if (request.result != UnityWebRequest.Result.Success)
         {
+            _cardFallbackText.text = namedValue;
+            _cardFallbackText.gameObject.SetActive(true);
             Debug.LogError($"Failed to load image from {url}: {request.error}");
-            return;
+            return false;
         }
 
         var texture = DownloadHandlerTexture.GetContent(request);
-        cardImage.sprite = Sprite.Create(
+        _cardImage.sprite = Sprite.Create(
             texture,
             new Rect(0, 0, texture.width, texture.height),
             new Vector2(0.5f, 0.5f)
         );
+        _cardImage.gameObject.SetActive(_cardImage.sprite != null);
+
+        return true;
     }
 }

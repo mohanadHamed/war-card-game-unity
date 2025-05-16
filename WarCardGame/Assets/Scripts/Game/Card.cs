@@ -1,9 +1,11 @@
 
 using System.Collections.Generic;
+using UnityEngine.InputSystem.Utilities;
 
 public class Card
 {
     public string ImageUrl { get; private set; }
+    public string NamedValue { get; private set; }
     public int Value { get; private set; }
 
     private readonly Dictionary<string, int> valueMap = new Dictionary<string, int>()
@@ -26,6 +28,7 @@ public class Card
     public Card(string imageUrl, string namedValue)
     {
         ImageUrl = imageUrl;
+        NamedValue = namedValue;
         Value = valueMap[namedValue.ToLower()];
     }
 }

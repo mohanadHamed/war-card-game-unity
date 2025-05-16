@@ -1,38 +1,62 @@
+using Cysharp.Threading.Tasks;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameUi : MonoBehaviour
 {
-    public CardDisplay playerCardDisplay;
-    public CardDisplay botCardDisplay;
-    public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI roundText;
-    public Button drawButton;
-
-    private GameManager _gameManager;
+    [SerializeField]
+    private CardDisplay _playerCardDisplay;
+    [SerializeField]
+    private CardDisplay _botCardDisplay;
+    [SerializeField]
+    private TextMeshProUGUI _scoreText;
+    [SerializeField]
+    private TextMeshProUGUI _roundText;
+    [SerializeField]
+    private Button _drawButton;
 
     [SerializeField]
     private SceneLoader _sceneLoader;
+
+    private GameManager _gameManager;
 
     private async void Start()
     {
         var deckService = new DeckService();
         _gameManager = new GameManager(deckService);
-        _gameManager.OnRoundCompleted += UpdateUI;
+        _gameManager.OnRoundCompleted += UpdateRoundResultsUi;
+        _gameManager.OnPlayerCardReady += UpdatePlayerCardUi;
+        _gameManager.OnBotCardReady += UpdateBotCardUi;
+
         _gameManager.OnGameEnded += EndGame;
+        _gameManager.OnGameStarted += UpdateLabels;
 
         await _gameManager.StartGameAsync();
-        drawButton.onClick.AddListener(async () => await _gameManager.PlayRoundAsync());
+        _drawButton.onClick.AddListener(async () => await _gameManager.PlayRoundAsync());
     }
 
-    private void UpdateUI(Card playerCard, Card botCard, RoundResult result, int playerScore, int botScore)
+    private void UpdatePlayerCardUi(Card playerCard)
     {
-        playerCardDisplay.SetCard(playerCard.ImageUrl);
-        botCardDisplay.SetCard(botCard.ImageUrl);
-        scoreText.text = $"Player: {playerScore} - Bot: {botScore}";
-        roundText.text = $"Round: {_gameManager.Round}";
+        _playerCardDisplay.SetCard(playerCard.ImageUrl, playerCard.NamedValue).Forget();
+    }
+
+    private void UpdateBotCardUi(Card botCard)
+    {
+        _botCardDisplay.SetCard(botCard.ImageUrl, botCard.NamedValue).Forget();
+    }
+
+    private void UpdateRoundResultsUi(RoundResult result, int playerScore, int botScore, int round)
+    {
+        UpdateLabels(playerScore, botScore, round);
+    }
+
+    private void UpdateLabels(int playerScore, int botScore, int round)
+    {
+        _scoreText.text = $"Player: {playerScore} - Bot: {botScore}";
+        _roundText.text = $"Round: {round}";
     }
 
     private void EndGame(string resultMessage)

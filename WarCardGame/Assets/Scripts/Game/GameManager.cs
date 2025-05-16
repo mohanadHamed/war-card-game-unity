@@ -3,12 +3,13 @@ using Cysharp.Threading.Tasks;
 
 public class GameManager
 {
-    public event Action<Card, Card, RoundResult, int, int> OnRoundCompleted;
-    public event Action<string> OnGameEnded;
+    public event Action<RoundResult, int, int, int> OnRoundCompleted;
+    public event Action<Card> OnPlayerCardReady;
+    public event Action<Card> OnBotCardReady;
 
-    private int _playerScore;
-    private int _botScore;
-    private int _round;
+    public event Action<string> OnGameEnded;
+    public Action<int, int, int> OnGameStarted;
+
     //private const int MaxRounds = 8;
     private const int ScoreToWin = 8;
     private const int BotDelayMs = 1000;
@@ -16,6 +17,10 @@ public class GameManager
 
     private readonly DeckService _deckService;
 
+    private int _playerScore;
+    private int _botScore;
+    private int _round;
+    
     public int Round => _round;
 
     public GameManager(DeckService deckService)
@@ -26,18 +31,25 @@ public class GameManager
     public async UniTask StartGameAsync()
     {
         _playerScore = _botScore = _round = 0;
+        OnGameStarted?.Invoke(_playerScore, _botScore, _round);
+
         await _deckService.InitDeckAsync();
     }
 
     public async UniTask PlayRoundAsync()
     {
-        if (/*_round >= MaxRounds ||*/ _playerScore == 8 || _botScore == 8)
+        if (/*_round >= MaxRounds ||*/ _playerScore == ScoreToWin || _botScore == ScoreToWin)
             return;
 
         _round++;
         var playerCard = await _deckService.DrawCardAsync();
-        await UniTask.Delay(1000);
+        OnPlayerCardReady?.Invoke(playerCard);
+
+        await UniTask.Delay(BotDelayMs);
+
         var botCard = await _deckService.DrawCardAsync();
+        OnBotCardReady?.Invoke(botCard);
+
 
         RoundResult result;
 
@@ -56,10 +68,9 @@ public class GameManager
             result = RoundResult.Draw;
         }
 
-        OnRoundCompleted?.Invoke(playerCard, botCard, result, _playerScore, _botScore);
+        OnRoundCompleted?.Invoke(result, _playerScore, _botScore, _round);
 
         await CheckGameOver();
-
     }
 
     private async UniTask CheckGameOver()
