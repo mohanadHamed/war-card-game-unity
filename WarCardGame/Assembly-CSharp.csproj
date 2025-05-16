@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\Game\DeckService\DataTypes\CardData.cs" />
     <Compile Include="Assets\Scripts\Game\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Game\UI\NetworkNotifyResponse.cs" />
     <Compile Include="Assets\Scripts\MainMenu\BgmManager.cs" />
     <Compile Include="Assets\Scripts\SaveSystem\GameSaveData.cs" />
     <Compile Include="Assets\Scripts\Game\RoundResult.cs" />

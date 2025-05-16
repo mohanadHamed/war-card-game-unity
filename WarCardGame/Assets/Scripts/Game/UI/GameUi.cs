@@ -3,6 +3,7 @@ using System;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -27,22 +28,64 @@ public class GameUi : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI _botAwardText;
 
+    [SerializeField]
+    private GameObject _networkNotifyPanel;
+    [SerializeField]
+    private TextMeshProUGUI _networkNotifyMessage;
+    [SerializeField]
+    private Button _networkRetryButton;
+    [SerializeField]
+    private Button _networkQuitButton;
+
     private GameManager _gameManager;
 
+    private NetworkNotifyResponse _NetworkNotifyReponse;
+    
     private async void Start()
     {
         var deckService = new DeckService();
         _gameManager = new GameManager(deckService);
         _gameManager.OnRoundCompleted += UpdateUiAfterRoundCompleted;
-        _gameManager.OnPlayerCardReady += UpdatePlayerCardUi;
-        _gameManager.OnBotCardReady += UpdateBotCardUi;
+        _gameManager.OnPlayerCardReadyAsync += UpdatePlayerCardUi;
+        _gameManager.OnBotCardReadyAsync += UpdateBotCardUi;
+        _gameManager.OnNetworkIssueNotifyAsync += ShowNetworkIssueNotify;
 
         _gameManager.OnGameEnded += EndGame;
+        _gameManager.OnQuitToMainMenu += QuiGameToMainMenu;
         _gameManager.OnGameStarted += ResetUi;
         _gameManager.OnShowAwardLabels += ShowAward;
 
-        await _gameManager.StartGameAsync();
         _drawButton.onClick.AddListener(DrawButtonClick());
+        _networkRetryButton.onClick.AddListener(RetryButtonClick);
+        _networkQuitButton.onClick.AddListener(QuitButtonClick);
+
+        await _gameManager.StartGameAsync();
+    }
+
+    private void QuitButtonClick()
+    {
+        _NetworkNotifyReponse = NetworkNotifyResponse.Quit;
+    }
+
+    private void RetryButtonClick()
+    {
+        _NetworkNotifyReponse = NetworkNotifyResponse.Retry;
+    }
+
+    private async UniTask<NetworkNotifyResponse> ShowNetworkIssueNotify(string message)
+    {
+        _NetworkNotifyReponse = NetworkNotifyResponse.None;
+
+        _networkNotifyPanel.SetActive(true);
+        _networkNotifyMessage.text = message;
+
+        while (_NetworkNotifyReponse == NetworkNotifyResponse.None)
+        {
+            await UniTask.DelayFrame(1);
+        }
+
+        _networkNotifyPanel.SetActive(false);
+        return _NetworkNotifyReponse;
     }
 
     private void ResetUi()
@@ -57,7 +100,7 @@ public class GameUi : MonoBehaviour
         _botCardDisplay.SetCardToBackImage().Forget();
     }
 
-    private UnityEngine.Events.UnityAction DrawButtonClick()
+    private UnityAction DrawButtonClick()
     {
         return async () =>
         {
@@ -133,6 +176,11 @@ public class GameUi : MonoBehaviour
     {
         PlayerPrefs.SetString("GameResult", resultMessage);
         _sceneLoader.LoadTargetScene("Result");
+    }
+
+    private void QuiGameToMainMenu()
+    {
+        _sceneLoader.LoadTargetScene("MainMenu");
     }
 
 }

@@ -4,10 +4,12 @@ using Cysharp.Threading.Tasks;
 public class GameManager
 {
     public event Action<RoundResult, int, int, int, bool> OnRoundCompleted;
-    public event Func<Card, UniTask> OnPlayerCardReady;
-    public event Func<Card, UniTask> OnBotCardReady;
+    public event Func<Card, UniTask> OnPlayerCardReadyAsync;
+    public event Func<Card, UniTask> OnBotCardReadyAsync;
+    public event Func<string, UniTask<NetworkNotifyResponse>> OnNetworkIssueNotifyAsync;
 
     public event Action<string> OnGameEnded;
+    public event Action OnQuitToMainMenu;
     public event Action OnGameStarted;
     public event Action<RoundResult> OnShowAwardLabels;
     
@@ -27,7 +29,7 @@ public class GameManager
     private int _round;
 
     private bool isGameOver => _playerScore == ScoreToWin || _botScore == ScoreToWin;
-    
+
     public GameManager(DeckService deckService)
     {
         _deckService = deckService;
@@ -38,7 +40,26 @@ public class GameManager
         _playerScore = _botScore = _round = 0;
         OnGameStarted?.Invoke();
 
-        await _deckService.InitDeckAsync();
+        await InitDeckAsync();
+    }
+
+    private async UniTask<bool> InitDeckAsync()
+    {
+        var success = await _deckService.InitDeckAsync();
+        if (!success && OnNetworkIssueNotifyAsync != null)
+        {
+            var response = await OnNetworkIssueNotifyAsync("A network connection issue occured while initializing deck service");
+            if (response == NetworkNotifyResponse.Retry)
+            {
+                success = await InitDeckAsync();
+            }
+            else if (response == NetworkNotifyResponse.Quit)
+            {
+                OnQuitToMainMenu?.Invoke();
+            }
+        }
+
+        return success;
     }
 
     public async UniTask PlayRoundAsync()
@@ -47,13 +68,20 @@ public class GameManager
             return;
 
         _round++;
-        var playerCard = await _deckService.DrawCardAsync();
-        await OnPlayerCardReady.Invoke(playerCard);
+        var playerCard = await DrawCardAsync();
+        if (OnPlayerCardReadyAsync != null)
+        {
+            await OnPlayerCardReadyAsync.Invoke(playerCard);
+        }
 
         await UniTask.Delay(BotDelayMs);
 
-        var botCard = await _deckService.DrawCardAsync();
-        await OnBotCardReady.Invoke(botCard);
+        var botCard = await DrawCardAsync();
+
+        if (OnBotCardReadyAsync != null)
+        {
+            await OnBotCardReadyAsync.Invoke(botCard);
+        }
 
 
         RoundResult result;
@@ -77,11 +105,30 @@ public class GameManager
 
         await UniTask.Delay(DelayToStartNextRoundMs);
         OnRoundCompleted?.Invoke(result, _playerScore, _botScore, _round, isGameOver);
-        
+
         if (isGameOver)
         {
             await GotoGameOver();
         }
+    }
+
+    private async UniTask<Card> DrawCardAsync()
+    {
+        var playerCard = await _deckService.DrawCardAsync();
+        if (playerCard == null && OnNetworkIssueNotifyAsync != null)
+        {
+            var response = await OnNetworkIssueNotifyAsync("A network connection issue occured while drawing a card");
+            if (response == NetworkNotifyResponse.Retry)
+            {
+                playerCard = await DrawCardAsync();
+            }
+            else if (response == NetworkNotifyResponse.Quit)
+            {
+                OnQuitToMainMenu?.Invoke();
+            }
+        }
+
+        return playerCard;
     }
 
     private async UniTask GotoGameOver()
