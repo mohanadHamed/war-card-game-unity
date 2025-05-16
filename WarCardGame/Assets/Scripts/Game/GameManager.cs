@@ -3,26 +3,30 @@ using Cysharp.Threading.Tasks;
 
 public class GameManager
 {
-    public event Action<RoundResult, int, int, int> OnRoundCompleted;
-    public event Action<Card> OnPlayerCardReady;
-    public event Action<Card> OnBotCardReady;
+    public event Action<RoundResult, int, int, int, bool> OnRoundCompleted;
+    public event Func<Card, UniTask> OnPlayerCardReady;
+    public event Func<Card, UniTask> OnBotCardReady;
 
     public event Action<string> OnGameEnded;
-    public Action<int, int, int> OnGameStarted;
+    public Action OnGameStarted;
+
+    public int Round => _round;
 
     //private const int MaxRounds = 8;
     private const int ScoreToWin = 8;
     private const int BotDelayMs = 1000;
     private const int DelayToLoadGameOverMs = 2000;
+    private const int DelayToStartNextRoundMs = 1000;
+
 
     private readonly DeckService _deckService;
 
     private int _playerScore;
     private int _botScore;
     private int _round;
-    
-    public int Round => _round;
 
+    private bool isGameOver => _playerScore == ScoreToWin || _botScore == ScoreToWin;
+    
     public GameManager(DeckService deckService)
     {
         _deckService = deckService;
@@ -31,7 +35,7 @@ public class GameManager
     public async UniTask StartGameAsync()
     {
         _playerScore = _botScore = _round = 0;
-        OnGameStarted?.Invoke(_playerScore, _botScore, _round);
+        OnGameStarted?.Invoke();
 
         await _deckService.InitDeckAsync();
     }
@@ -43,12 +47,12 @@ public class GameManager
 
         _round++;
         var playerCard = await _deckService.DrawCardAsync();
-        OnPlayerCardReady?.Invoke(playerCard);
+        await OnPlayerCardReady.Invoke(playerCard);
 
         await UniTask.Delay(BotDelayMs);
 
         var botCard = await _deckService.DrawCardAsync();
-        OnBotCardReady?.Invoke(botCard);
+        await OnBotCardReady.Invoke(botCard);
 
 
         RoundResult result;
@@ -68,12 +72,16 @@ public class GameManager
             result = RoundResult.Draw;
         }
 
-        OnRoundCompleted?.Invoke(result, _playerScore, _botScore, _round);
+        await UniTask.Delay(DelayToStartNextRoundMs);
+        OnRoundCompleted?.Invoke(result, _playerScore, _botScore, _round, isGameOver);
 
-        await CheckGameOver();
+        if (isGameOver)
+        {
+            await GotoGameOver();
+        }
     }
 
-    private async UniTask CheckGameOver()
+    private async UniTask GotoGameOver()
     {
         if (_playerScore == ScoreToWin)
         {

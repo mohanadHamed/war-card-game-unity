@@ -5,6 +5,7 @@ using UnityEngine.Networking;
 
 public class DeckService
 {
+    public const string CardBackImageURL = "https://deckofcardsapi.com/static/img/back.png";
     private string _deckId;
 
     public async UniTask InitDeckAsync()
