@@ -8,8 +8,9 @@ public class GameManager
     public event Func<Card, UniTask> OnBotCardReady;
 
     public event Action<string> OnGameEnded;
-    public Action OnGameStarted;
-
+    public event Action OnGameStarted;
+    public event Action<RoundResult> OnShowAwardLabels;
+    
     public int Round => _round;
 
     //private const int MaxRounds = 8;
@@ -72,9 +73,11 @@ public class GameManager
             result = RoundResult.Draw;
         }
 
+        OnShowAwardLabels?.Invoke(result);
+
         await UniTask.Delay(DelayToStartNextRoundMs);
         OnRoundCompleted?.Invoke(result, _playerScore, _botScore, _round, isGameOver);
-
+        
         if (isGameOver)
         {
             await GotoGameOver();

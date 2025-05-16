@@ -22,6 +22,11 @@ public class GameUi : MonoBehaviour
     [SerializeField]
     private SceneLoader _sceneLoader;
 
+    [SerializeField]
+    private TextMeshProUGUI _playerAwardText;
+    [SerializeField]
+    private TextMeshProUGUI _botAwardText;
+
     private GameManager _gameManager;
 
     private async void Start()
@@ -34,6 +39,7 @@ public class GameUi : MonoBehaviour
 
         _gameManager.OnGameEnded += EndGame;
         _gameManager.OnGameStarted += ResetUi;
+        _gameManager.OnShowAwardLabels += ShowAward;
 
         await _gameManager.StartGameAsync();
         _drawButton.onClick.AddListener(DrawButtonClick());
@@ -41,7 +47,7 @@ public class GameUi : MonoBehaviour
 
     private void ResetUi()
     {
-        UpdateLabels(0, 0, 0);
+        UpdateScoreBoard(0, 0, 0);
         SetCardsToBackImage();
     }
 
@@ -72,7 +78,8 @@ public class GameUi : MonoBehaviour
 
     private void UpdateUiAfterRoundCompleted(RoundResult result, int playerScore, int botScore, int round, bool isGameOver)
     {
-        UpdateLabels(playerScore, botScore, round);
+        UpdateScoreBoard(playerScore, botScore, round);
+        HideAwards();
 
         if (!isGameOver)
         {
@@ -91,10 +98,35 @@ public class GameUi : MonoBehaviour
         _drawButton.interactable = false;
     }
 
-    private void UpdateLabels(int playerScore, int botScore, int round)
+    private void UpdateScoreBoard(int playerScore, int botScore, int round)
     {
         _scoreText.text = $"Player: {playerScore} - Bot: {botScore}";
         _roundText.text = $"Round: {round}";
+    }
+
+    private void ShowAward(RoundResult result)
+    {
+        switch(result)
+        {
+            case RoundResult.PlayerWins:
+                _playerAwardText.gameObject.SetActive(true);
+                _botAwardText.gameObject.SetActive(false);
+                break;
+
+            case RoundResult.BotWins:
+                _playerAwardText.gameObject.SetActive(false);
+                _botAwardText.gameObject.SetActive(true);
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    private void HideAwards()
+    {
+        _playerAwardText.gameObject.SetActive(false);
+        _botAwardText.gameObject.SetActive(false);
     }
 
     private void EndGame(string resultMessage)
