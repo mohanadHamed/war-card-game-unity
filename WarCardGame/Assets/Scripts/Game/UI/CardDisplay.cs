@@ -15,7 +15,6 @@ public class CardDisplay : MonoBehaviour
     public async UniTask<bool> SetCard(string imageUrl, string namedValue)
     {
         _cardFallbackText.gameObject.SetActive(false);
-        _cardImage.gameObject.SetActive(false);
         await LoadImageAsync(imageUrl, namedValue);
         return true;
     }
@@ -23,7 +22,6 @@ public class CardDisplay : MonoBehaviour
     public async UniTask<bool> SetCardToBackImage()
     {
         _cardFallbackText.gameObject.SetActive(false);
-        _cardImage.gameObject.SetActive(false);
         await LoadCardBackImageAsync();
         return true;
     }
@@ -47,16 +45,13 @@ public class CardDisplay : MonoBehaviour
             new Rect(0, 0, texture.width, texture.height),
             new Vector2(0.5f, 0.5f)
         );
-        _cardImage.gameObject.SetActive(_cardImage.sprite != null);
-
+        
         return true;
     }
 
     private async UniTask<bool> LoadCardBackImageAsync()
     {
-        Texture2D texture = null;
-
-        if(_backImageSprite == null)
+        if (_backImageSprite == null)
         {
             // Download texture
             using var request = UnityWebRequestTexture.GetTexture(DeckService.CardBackImageURL);
@@ -68,7 +63,7 @@ public class CardDisplay : MonoBehaviour
                 return false;
             }
 
-            texture = DownloadHandlerTexture.GetContent(request);
+            var texture = DownloadHandlerTexture.GetContent(request);
 
             // Apply sprite
             _backImageSprite = Sprite.Create(
@@ -80,7 +75,6 @@ public class CardDisplay : MonoBehaviour
 
         _cardImage.sprite = _backImageSprite;
 
-        _cardImage.gameObject.SetActive(_backImageSprite != null);
         return true;
     }
 }
