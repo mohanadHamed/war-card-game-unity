@@ -5,6 +5,10 @@ using UnityEngine.UI;
 
 public class SceneLoader : MonoBehaviour
 {
+    public const string MainMenuSceneName = "MainMenu";
+    public const string GameSceneName = "Game";
+    public const string ResultSceneName = "Result";
+
     [SerializeField]
     private Slider _loadingBar;
 

@@ -32,6 +32,6 @@ public class ResultUi : MonoBehaviour
 
     public void BackToMenu()
     {
-        _sceneLoader.LoadTargetScene("MainMenu");
+        _sceneLoader.LoadTargetScene(SceneLoader.MainMenuSceneName);
     }
 }

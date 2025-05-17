@@ -22,38 +22,31 @@ public class GameManager
     private const int DelayToLoadGameOverMs = 1000;
     private const int DelayToStartNextRoundMs = 1000;
 
-
-    private readonly DeckService _deckService;
-
     private int _playerScore;
     private int _botScore;
     private int _round;
 
     private bool IsGameOver => _playerScore == ScoreToWin || _botScore == ScoreToWin;
 
-    public GameManager(DeckService deckService)
-    {
-        _deckService = deckService;
-    }
-
+    private string _deckId;
     public async UniTask StartGameAsync()
     {
-        await InitDeckAsync();
+        _deckId = await InitDeckAsync();
 
         _playerScore = _botScore = _round = 0;
 
         await OnGameStarted.Invoke();
     }
 
-    private async UniTask<bool> InitDeckAsync()
+    private async UniTask<string> InitDeckAsync()
     {
-        var success = await _deckService.InitDeckAsync();
-        if (!success && OnNetworkIssueNotifyAsync != null)
+        var deckId = await DeckService.InitDeckAsync();
+        if (string.IsNullOrEmpty(deckId) && OnNetworkIssueNotifyAsync != null)
         {
-            var response = await OnNetworkIssueNotifyAsync("A network connection issue occured while initializing deck service");
+            var response = await OnNetworkIssueNotifyAsync("A network connection issue occurred while shuffling deck");
             if (response == NetworkNotifyResponse.Retry)
             {
-                success = await InitDeckAsync();
+                deckId = await InitDeckAsync();
             }
             else if (response == NetworkNotifyResponse.Quit)
             {
@@ -61,7 +54,7 @@ public class GameManager
             }
         }
 
-        return success;
+        return deckId;
     }
 
     public async UniTask PlayRoundAsync()
@@ -118,7 +111,7 @@ public class GameManager
 
     private async UniTask<Card> DrawCardAsync()
     {
-        var playerCard = await _deckService.DrawCardAsync();
+        var playerCard = await DeckService.DrawCardAsync(_deckId);
         if (playerCard == null && OnNetworkIssueNotifyAsync != null)
         {
             var response = await OnNetworkIssueNotifyAsync("A network connection issue occured while drawing a card");

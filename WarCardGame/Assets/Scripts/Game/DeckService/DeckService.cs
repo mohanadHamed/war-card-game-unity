@@ -5,42 +5,45 @@ using UnityEngine.Networking;
 
 public class DeckService
 {
-    public const string CardBackImageURL = "https://deckofcardsapi.com/static/img/back.png";
+    public const string CardBackImageURL = BaseUrl + "/static/img/back.png";
 
+    private const string BaseUrl = "https://deckofcardsapi.com";
+    private const string ApiUrl = BaseUrl + "/api/deck";
+    private const string DeckInitUrl = ApiUrl + "/new/shuffle/?deck_count=1";
+    
     private const int RequestTimeoutSeconds = 5;
 
-    private string _deckId;
-
-    public async UniTask<bool> InitDeckAsync()
+    public static async UniTask<string> InitDeckAsync()
     {
         try
         {
-            using var request = UnityWebRequest.Get("https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1");
+            using var request = UnityWebRequest.Get(DeckInitUrl);
             request.timeout = RequestTimeoutSeconds;
             await request.SendWebRequest();
 
             if (request.result != UnityWebRequest.Result.Success)
             {
                 Debug.LogError("Error initializing deck: " + request.error);
-                return false;
+                return null;
             }
 
             var deckShuffleResponse = JsonUtility.FromJson<DeckShuffleResponse>(request.downloadHandler.text);
-            _deckId = deckShuffleResponse.deck_id;
-            return true;
+            return deckShuffleResponse.deck_id;
         }
         catch (Exception e)
         {
             Debug.LogError("Error initializing deck service " + e.Message);
-            return false;
+            return null;
         }
     }
 
-    public async UniTask<Card> DrawCardAsync()
+    public static async UniTask<Card> DrawCardAsync(string deckId)
     {
         try
         {
-            using var request = UnityWebRequest.Get($"https://deckofcardsapi.com/api/deck/{_deckId}/draw/?count=1");
+            var drawCardUrl = $"{ApiUrl}/{deckId}/draw/?count=1";
+
+            using var request = UnityWebRequest.Get(drawCardUrl);
             request.timeout = RequestTimeoutSeconds;
             await request.SendWebRequest();
 

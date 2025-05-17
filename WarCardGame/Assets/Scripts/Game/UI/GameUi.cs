@@ -43,8 +43,7 @@ public class GameUi : MonoBehaviour
     
     private async void Start()
     {
-        var deckService = new DeckService();
-        _gameManager = new GameManager(deckService);
+        _gameManager = new GameManager();
         _gameManager.OnRoundCompleted += UpdateUiAfterRoundCompleted;
         _gameManager.OnPlayerCardReadyAsync += UpdatePlayerCardUi;
         _gameManager.OnBotCardReadyAsync += UpdateBotCardUi;
@@ -176,12 +175,12 @@ public class GameUi : MonoBehaviour
     private void EndGame(GameResult gameResult)
     {
         PlayerPrefs.SetInt("GameResult", (int)gameResult);
-        _sceneLoader.LoadTargetScene("Result");
+        _sceneLoader.LoadTargetScene(SceneLoader.ResultSceneName);
     }
 
     private void QuiGameToMainMenu()
     {
-        _sceneLoader.LoadTargetScene("MainMenu");
+        _sceneLoader.LoadTargetScene(SceneLoader.MainMenuSceneName);
     }
 
 }

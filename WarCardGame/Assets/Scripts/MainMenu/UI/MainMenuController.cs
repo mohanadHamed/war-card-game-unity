@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -28,7 +27,7 @@ public class MainMenuController : MonoBehaviour
     public void PlayButtonClick()
     {
         DisableAllButtons();
-        _sceneLoader.LoadTargetScene("Game");
+        _sceneLoader.LoadTargetScene(SceneLoader.GameSceneName);
     }
 
     public void SettingsButtonClick()
