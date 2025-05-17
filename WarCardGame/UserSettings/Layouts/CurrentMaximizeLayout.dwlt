@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 17583
+  controlID: 3219
   draggingID: 0
 --- !u!114 &2
 MonoBehaviour:
@@ -151,7 +151,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 17534
+  controlID: 3220
   draggingID: 0
 --- !u!114 &4
 MonoBehaviour:
@@ -177,7 +177,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 17525
+  controlID: 3221
   draggingID: 0
 --- !u!114 &5
 MonoBehaviour:
@@ -198,8 +198,8 @@ MonoBehaviour:
     y: 0
     width: 700
     height: 778
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 201, y: 226}
+  m_MaxSize: {x: 4001, y: 4026}
   m_ActualView: {fileID: 6}
   m_Panes:
   - {fileID: 6}
@@ -246,7 +246,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: c420ffffd83dffff18a1ffff2ea2ffff34b6ffff8ab8ffff98b8ffff9ab8fffffec2ffff7ed2ffffd2dcffffe6ddffffd2dfffff78e4ffff5ee5ffff04ebffff52efffff0cfbffff92b8000024b90000d8ba00008abf0000bec00000fec000002ec10000eac10000b4cc0000fad90000
+      m_ExpandedIDs: a8edffffbaedffff98f0ffffeef0ffff7cf1ffff0cfbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1057,8 +1057,8 @@ MonoBehaviour:
     y: 778
     width: 2003
     height: 515
-  m_MinSize: {x: 230, y: 250}
-  m_MaxSize: {x: 10000, y: 10000}
+  m_MinSize: {x: 231, y: 276}
+  m_MaxSize: {x: 10001, y: 10026}
   m_ActualView: {fileID: 11}
   m_Panes:
   - {fileID: 11}
@@ -1112,7 +1112,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -1122,16 +1122,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Scenes
+  - Assets
   m_LastFoldersGridSize: 16
   m_LastProjectPath: C:\Users\mohanad_ugd\Documents\rpo\war-card-game-unity\WarCardGame
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 64b40000
-    m_LastClickedID: 46180
-    m_ExpandedIDs: 0000000006b4000008b400000ab4000000ca9a3b
+    m_SelectedIDs: 42b40000
+    m_LastClickedID: 46146
+    m_ExpandedIDs: 0000000042b4000044b4000046b4000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1160,7 +1160,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000006b4000008b400000ab4000000ca9a3b
+    m_ExpandedIDs: 0000000042b4000044b4000046b4000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1186,8 +1186,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 78b40000
-    m_LastClickedInstanceID: 46200
+    m_SelectedInstanceIDs: dac90000
+    m_LastClickedInstanceID: 51674
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c62300006eef00003a140100d2f0000000ff0000d6fb000016bf00002ec5000018e500009cbf00000651010004c1000060c400001eac0200f052010000000000925c010078b50000
     m_RenameOverlay:
@@ -1273,8 +1273,8 @@ MonoBehaviour:
     y: 0
     width: 557
     height: 1293
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 76}
+  m_MaxSize: {x: 4001, y: 4026}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -1322,7 +1322,7 @@ MonoBehaviour:
     m_CachedPref: -560.8
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
-  m_LastInspectedObjectInstanceID: 46200
+  m_LastInspectedObjectInstanceID: 51674
   m_LastVerticalScrollValue: 0
   m_GlobalObjectId: 
   m_InspectorMode: 0

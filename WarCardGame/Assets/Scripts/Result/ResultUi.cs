@@ -17,7 +17,7 @@ public class ResultUi : MonoBehaviour
     private void Start()
     {
         var gameResult = (GameResult)PlayerPrefs.GetInt("GameResult");
-        _resultText.text = gameResult == GameResult.PlayerWins ? "You Win!" : "You Lose!";
+        _resultText.text = gameResult == GameResult.PlayerWins ? "You Win!" : "Bot Wins!";
         _mainMenuButton.onClick.AddListener(() => BackToMenu());
 
         if(gameResult == GameResult.PlayerWins )

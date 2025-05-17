@@ -30,7 +30,6 @@ public class CardDisplay : MonoBehaviour
     {
         SfxAudioManager.Instance.PlaySfxAudio(SfxAudioManager.Instance.CardFlipAudio);
         
-        // Flip Out (scale to 0)
         await FlipOutCard();
 
         using var request = UnityWebRequestTexture.GetTexture(url);
@@ -52,7 +51,6 @@ public class CardDisplay : MonoBehaviour
             new Vector2(0.5f, 0.5f)
         );
 
-        // Flip In
         await FlipInCard();
 
         return true;
@@ -60,12 +58,16 @@ public class CardDisplay : MonoBehaviour
 
     private async UniTask FlipInCard()
     {
-        await _cardImage.transform.DOScaleX(1f, 0.1f).AsyncWaitForCompletion();
+        var sequence = DOTween.Sequence();
+        sequence.Join(_cardImage.transform.DORotate(Vector3.zero, 0.1f));
+        await sequence.AsyncWaitForCompletion();
     }
 
     private async UniTask FlipOutCard()
     {
-        await _cardImage.transform.DOScaleX(0f, 0.15f).AsyncWaitForCompletion();
+        var sequence = DOTween.Sequence();
+        sequence.Join(_cardImage.transform.DORotate(new Vector3(0, 90, 180), 0.2f));
+        await sequence.AsyncWaitForCompletion();
     }
 
     private async UniTask<bool> LoadCardBackImageAsync()
