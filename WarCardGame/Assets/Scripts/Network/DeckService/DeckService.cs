@@ -14,20 +14,20 @@ namespace Network.DeckService
         private const string BaseUrl = "https://deckofcardsapi.com";
         private const string ApiUrl = BaseUrl + "/api/deck";
         private const string DeckInitUrl = ApiUrl + "/new/shuffle/?deck_count=1";
-    
+
         private const int RequestTimeoutSeconds = 5;
 
-        public static async UniTask<string> InitDeckAsync()
+        public static async UniTask<string> InitDeckAsync(string deckInitUrl = DeckInitUrl)
         {
             try
             {
-                using var request = UnityWebRequest.Get(DeckInitUrl);
+                using var request = UnityWebRequest.Get(deckInitUrl);
                 request.timeout = RequestTimeoutSeconds;
                 await request.SendWebRequest();
 
                 if (request.result != UnityWebRequest.Result.Success)
                 {
-                    Debug.LogError("Error initializing deck: " + request.error);
+                    Debug.LogWarning("Error initializing deck: " + request.error);
                     return null;
                 }
 
@@ -36,7 +36,7 @@ namespace Network.DeckService
             }
             catch (Exception e)
             {
-                Debug.LogError("Error initializing deck service " + e.Message);
+                Debug.LogWarning("Error initializing deck service " + e.Message);
                 return null;
             }
         }
@@ -53,7 +53,7 @@ namespace Network.DeckService
 
                 if (request.result != UnityWebRequest.Result.Success)
                 {
-                    Debug.LogError("Error drawing card: " + request.error);
+                    Debug.LogWarning("Error drawing card: " + request.error);
                     return null;
                 }
 
@@ -63,9 +63,10 @@ namespace Network.DeckService
             }
             catch (Exception e)
             {
-                Debug.LogError("Error drawing card: " + e.Message);
+                Debug.LogWarning("Error drawing card: " + e.Message);
                 return null;
             }
         }
     }
+
 }
