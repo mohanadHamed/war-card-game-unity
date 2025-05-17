@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 99
+  controlID: 2008
   draggingID: 0
 --- !u!114 &2
 MonoBehaviour:
@@ -146,12 +146,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 2003
+    width: 2002
     height: 1293
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 161
+  controlID: 1954
   draggingID: 0
 --- !u!114 &4
 MonoBehaviour:
@@ -172,12 +172,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 2003
+    width: 2002
     height: 778
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 41
+  controlID: 1945
   draggingID: 0
 --- !u!114 &5
 MonoBehaviour:
@@ -246,7 +246,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 08fbffff
+      m_ExpandedIDs: acacffffeaadffffd4afffff12b1ffff46b3ffff0cb4ffff7ac1ffff3ac2ffff5cc9ffffb2caffff72cbffff2ccdffff76ceffffb2cfffff72d0ffff32d1fffff2d1ffff30d3ffff6cd4ffff2cd5ffff6ad6ffffbad7ffff44ecffff56ecffff34efffff9aefffff28f0ffff72f1ffff32f2ffff88f3ffffc6f4ffff86f5ffff52f6ffff14f7ffff08fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -288,7 +288,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 700
     y: 0
-    width: 1303
+    width: 1302
     height: 778
   m_MinSize: {x: 202, y: 226}
   m_MaxSize: {x: 4002, y: 4026}
@@ -299,7 +299,7 @@ MonoBehaviour:
   - {fileID: 9}
   - {fileID: 10}
   m_Selected: 1
-  m_LastSelected: 2
+  m_LastSelected: 0
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -323,7 +323,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 700
     y: 79
-    width: 1301
+    width: 1300
     height: 752
   m_SerializedDataModeController:
     m_DataMode: 0
@@ -879,9 +879,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: 352.4426, y: 1199.9727, z: -2.3118172}
+    m_Target: {x: 1104.6063, y: 1334.2018, z: -11.034324}
     speed: 2
-    m_Value: {x: 352.4426, y: 1199.9727, z: -2.3118172}
+    m_Value: {x: 1104.6063, y: 1334.2018, z: -11.034324}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -931,9 +931,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 383.2507
+    m_Target: 1255.5
     speed: 2
-    m_Value: 383.2507
+    m_Value: 1255.5
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -991,7 +991,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 700
     y: 79
-    width: 1301
+    width: 1300
     height: 752
   m_SerializedDataModeController:
     m_DataMode: 0
@@ -1005,7 +1005,7 @@ MonoBehaviour:
     m_ContainerData: []
     m_OverlaysVisible: 1
   m_Spl:
-    ID: 108
+    ID: 2039
     splitterInitialOffset: 0
     currentActiveSplitter: -1
     realSizes:
@@ -1032,7 +1032,7 @@ MonoBehaviour:
   m_TestListGUIs:
   - m_Window: {fileID: 9}
     runProgress:
-      RunGuid: 
+      RunGuid: d7ec55b6-7ddc-4bc6-a40e-cb558f31b843
       ExecutionSettings:
         m_TargetPlatform: 0
         m_HasTargetPlatform: 0
@@ -1042,9 +1042,14 @@ MonoBehaviour:
           groupNames: []
           categoryNames: []
           assemblyNames: []
-        filters: []
+        filters:
+        - testMode: 1
+          testNames: []
+          groupNames: []
+          categoryNames: []
+          assemblyNames: []
         runSynchronously: 0
-        playerHeartbeatTimeout: 0
+        playerHeartbeatTimeout: 600
         orderedTestNames: []
         ignoreTests: []
         featureFlags:
@@ -1053,16 +1058,16 @@ MonoBehaviour:
           strictDomainReload: 0
           disableNestedEnumeratorBugfix: 0
         randomOrderSeed: 0
-      HasFinished: 0
-      Progress: 0
-      CurrentStepName: 
+      HasFinished: 1
+      Progress: 0.9999998
+      CurrentStepName: Unlock Reload Assemblies
       CurrentStageName: 
     m_NewResultList:
     - id: 1000
       uniqueId: '[WarCardGame][suite]'
       name: WarCardGame
       fullName: WarCardGame
-      resultStatus: 0
+      resultStatus: 1
       duration: 0
       messages: 
       output: 
@@ -1074,11 +1079,11 @@ MonoBehaviour:
       categories: []
       parentId: 
       parentUniqueId: 
-    - id: 1004
+    - id: 1011
       uniqueId: '[Tests][C:/Users/mohanad_ugd/Documents/rpo/war-card-game-unity/WarCardGame/Library/ScriptAssemblies/Tests.dll][suite]'
       name: Tests.dll
       fullName: C:/Users/mohanad_ugd/Documents/rpo/war-card-game-unity/WarCardGame/Library/ScriptAssemblies/Tests.dll
-      resultStatus: 0
+      resultStatus: 1
       duration: 0
       messages: 
       output: 
@@ -1088,13 +1093,13 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1000
+      parentId: 1016
       parentUniqueId: '[WarCardGame][suite]'
     - id: 1001
-      uniqueId: 'Tests.dll/[Tests][NewTestScript][suite]'
-      name: NewTestScript
-      fullName: NewTestScript
-      resultStatus: 0
+      uniqueId: 'Tests.dll/[Tests][DeckServiceTests][suite]'
+      name: DeckServiceTests
+      fullName: DeckServiceTests
+      resultStatus: 1
       duration: 0
       messages: 
       output: 
@@ -1104,16 +1109,21 @@ MonoBehaviour:
       description: 
       isSuite: 1
       categories: []
-      parentId: 1004
+      parentId: 1011
       parentUniqueId: '[Tests][C:/Users/mohanad_ugd/Documents/rpo/war-card-game-unity/WarCardGame/Library/ScriptAssemblies/Tests.dll][suite]'
-    - id: 1002
-      uniqueId: 'Tests.dll/NewTestScript/[Tests][NewTestScript.NewTestScriptSimplePasses]'
-      name: NewTestScriptSimplePasses
-      fullName: NewTestScript.NewTestScriptSimplePasses
-      resultStatus: 0
-      duration: 0
+    - id: 1005
+      uniqueId: 'Tests.dll/DeckServiceTests/[Tests][DeckServiceTests.DrawCardAsync_InvalidDeckId_ReturnsNull]'
+      name: DrawCardAsync_InvalidDeckId_ReturnsNull
+      fullName: DeckServiceTests.DrawCardAsync_InvalidDeckId_ReturnsNull
+      resultStatus: 1
+      duration: 0.2008223
       messages: 
-      output: 
+      output: 'Error drawing card: HTTP/1.1 404 Not Found
+
+        {"success": false,
+        "error": "Deck ID does not exist."}
+
+'
       stacktrace: 
       notRunnable: 0
       ignoredOrSkipped: 0
@@ -1122,13 +1132,13 @@ MonoBehaviour:
       categories:
       - Uncategorized
       parentId: 1001
-      parentUniqueId: 'Tests.dll/[Tests][NewTestScript][suite]'
+      parentUniqueId: 'Tests.dll/[Tests][DeckServiceTests][suite]'
     - id: 1003
-      uniqueId: 'Tests.dll/NewTestScript/[Tests][NewTestScript.NewTestScriptWithEnumeratorPasses]'
-      name: NewTestScriptWithEnumeratorPasses
-      fullName: NewTestScript.NewTestScriptWithEnumeratorPasses
-      resultStatus: 0
-      duration: 0
+      uniqueId: 'Tests.dll/DeckServiceTests/[Tests][DeckServiceTests.DrawCardAsync_ReturnsValidCard]'
+      name: DrawCardAsync_ReturnsValidCard
+      fullName: DeckServiceTests.DrawCardAsync_ReturnsValidCard
+      resultStatus: 1
+      duration: 0.4206393
       messages: 
       output: 
       stacktrace: 
@@ -1139,14 +1149,142 @@ MonoBehaviour:
       categories:
       - Uncategorized
       parentId: 1001
-      parentUniqueId: 'Tests.dll/[Tests][NewTestScript][suite]'
-    m_ResultText: 
+      parentUniqueId: 'Tests.dll/[Tests][DeckServiceTests][suite]'
+    - id: 1004
+      uniqueId: 'Tests.dll/DeckServiceTests/[Tests][DeckServiceTests.InitDeckAsync_InvalidUrl_ReturnsNull]'
+      name: InitDeckAsync_InvalidUrl_ReturnsNull
+      fullName: DeckServiceTests.InitDeckAsync_InvalidUrl_ReturnsNull
+      resultStatus: 1
+      duration: 0.0184057
+      messages: 
+      output: 'Error initializing deck service Cannot resolve destination host
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: 'Tests.dll/[Tests][DeckServiceTests][suite]'
+    - id: 1002
+      uniqueId: 'Tests.dll/DeckServiceTests/[Tests][DeckServiceTests.InitDeckAsync_ReturnsValidDeckId]'
+      name: InitDeckAsync_ReturnsValidDeckId
+      fullName: DeckServiceTests.InitDeckAsync_ReturnsValidDeckId
+      resultStatus: 1
+      duration: 0.1924655
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: 'Tests.dll/[Tests][DeckServiceTests][suite]'
+    - id: 1006
+      uniqueId: 'Tests.dll/DeckServiceTests/[Tests][DeckServiceTests.InitDeckAsync_ValidUrl_InvalidJson_ReturnsNull]'
+      name: InitDeckAsync_ValidUrl_InvalidJson_ReturnsNull
+      fullName: DeckServiceTests.InitDeckAsync_ValidUrl_InvalidJson_ReturnsNull
+      resultStatus: 1
+      duration: 0.0796719
+      messages: 
+      output: "Error initializing deck service HTTP/1.1 403 Forbidden\r\n{\n  \"error\":
+        {\n    \"code\": 403,\n    \"message\": \"Method doesn't allow unregistered
+        callers (callers without established identity). Please use API Key or other
+        form of API consumer identity to call this API.\",\n    \"errors\": [\n     
+        {\n        \"message\": \"Method doesn't allow unregistered callers (callers
+        without established identity). Please use API Key or other form of API consumer
+        identity to call this API.\",\n        \"domain\": \"global\",\n        \"reason\":
+        \"forbidden\"\n      }\n    ],\n    \"status\": \"PERMISSION_DENIED\"\n 
+        }\n}\n\r\n"
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: 'Tests.dll/[Tests][DeckServiceTests][suite]'
+    - id: 1007
+      uniqueId: 'Tests.dll/[Tests][GameManagerTests][suite]'
+      name: GameManagerTests
+      fullName: GameManagerTests
+      resultStatus: 1
+      duration: 0
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1011
+      parentUniqueId: '[Tests][C:/Users/mohanad_ugd/Documents/rpo/war-card-game-unity/WarCardGame/Library/ScriptAssemblies/Tests.dll][suite]'
+    - id: 1010
+      uniqueId: 'Tests.dll/GameManagerTests/[Tests][GameManagerTests.PlayRoundAsync_DrawReturnsNull_ShowsNetworkNotify]'
+      name: PlayRoundAsync_DrawReturnsNull_ShowsNetworkNotify
+      fullName: GameManagerTests.PlayRoundAsync_DrawReturnsNull_ShowsNetworkNotify
+      resultStatus: 1
+      duration: 2.0073316
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1007
+      parentUniqueId: 'Tests.dll/[Tests][GameManagerTests][suite]'
+    - id: 1009
+      uniqueId: 'Tests.dll/GameManagerTests/[Tests][GameManagerTests.PlayRoundAsync_UpdatesScoreAndFiresEvents]'
+      name: PlayRoundAsync_UpdatesScoreAndFiresEvents
+      fullName: GameManagerTests.PlayRoundAsync_UpdatesScoreAndFiresEvents
+      resultStatus: 1
+      duration: 0.0085228
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1007
+      parentUniqueId: 'Tests.dll/[Tests][GameManagerTests][suite]'
+    - id: 1008
+      uniqueId: 'Tests.dll/GameManagerTests/[Tests][GameManagerTests.StartGameAsync_InitializesDeckAndResetsScores]'
+      name: StartGameAsync_InitializesDeckAndResetsScores
+      fullName: GameManagerTests.StartGameAsync_InitializesDeckAndResetsScores
+      resultStatus: 1
+      duration: 0.0045462
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1007
+      parentUniqueId: 'Tests.dll/[Tests][GameManagerTests][suite]'
+    m_ResultText: GameManagerTests (3 tests) (0.000s)
     m_ResultStacktrace: 
     m_TestListState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: f4a9c8af
-      m_LastClickedID: -1345803788
-      m_ExpandedIDs: a4d42861ffffff7f
+      m_SelectedIDs: 752e4eff
+      m_LastClickedID: -11653515
+      m_ExpandedIDs: f4a9c8af752e4eff7e878c60a4d42861ffffff7f
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1176,7 +1314,7 @@ MonoBehaviour:
     m_SelectedOption: 0
   - m_Window: {fileID: 0}
     runProgress:
-      RunGuid: 
+      RunGuid: d7ec55b6-7ddc-4bc6-a40e-cb558f31b843
       ExecutionSettings:
         m_TargetPlatform: 0
         m_HasTargetPlatform: 0
@@ -1186,9 +1324,14 @@ MonoBehaviour:
           groupNames: []
           categoryNames: []
           assemblyNames: []
-        filters: []
+        filters:
+        - testMode: 1
+          testNames: []
+          groupNames: []
+          categoryNames: []
+          assemblyNames: []
         runSynchronously: 0
-        playerHeartbeatTimeout: 0
+        playerHeartbeatTimeout: 600
         orderedTestNames: []
         ignoreTests: []
         featureFlags:
@@ -1197,9 +1340,9 @@ MonoBehaviour:
           strictDomainReload: 0
           disableNestedEnumeratorBugfix: 0
         randomOrderSeed: 0
-      HasFinished: 0
-      Progress: 0
-      CurrentStepName: 
+      HasFinished: 1
+      Progress: 0.9999998
+      CurrentStepName: Unlock Reload Assemblies
       CurrentStageName: 
     m_NewResultList: []
     m_ResultText: 
@@ -1237,7 +1380,7 @@ MonoBehaviour:
     m_SelectedOption: 0
   - m_Window: {fileID: 0}
     runProgress:
-      RunGuid: 
+      RunGuid: d7ec55b6-7ddc-4bc6-a40e-cb558f31b843
       ExecutionSettings:
         m_TargetPlatform: 0
         m_HasTargetPlatform: 0
@@ -1247,9 +1390,14 @@ MonoBehaviour:
           groupNames: []
           categoryNames: []
           assemblyNames: []
-        filters: []
+        filters:
+        - testMode: 1
+          testNames: []
+          groupNames: []
+          categoryNames: []
+          assemblyNames: []
         runSynchronously: 0
-        playerHeartbeatTimeout: 0
+        playerHeartbeatTimeout: 600
         orderedTestNames: []
         ignoreTests: []
         featureFlags:
@@ -1258,9 +1406,9 @@ MonoBehaviour:
           strictDomainReload: 0
           disableNestedEnumeratorBugfix: 0
         randomOrderSeed: 0
-      HasFinished: 0
-      Progress: 0
-      CurrentStepName: 
+      HasFinished: 1
+      Progress: 0.9999998
+      CurrentStepName: Unlock Reload Assemblies
       CurrentStageName: 
     m_NewResultList: []
     m_ResultText: 
@@ -1317,10 +1465,10 @@ MonoBehaviour:
     m_TextWithWhitespace: "Animator\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 754
+    x: 700
     y: 79
-    width: 1399
-    height: 937
+    width: 1301
+    height: 752
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -1385,7 +1533,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 778
-    width: 2003
+    width: 2002
     height: 515
   m_MinSize: {x: 231, y: 276}
   m_MaxSize: {x: 10001, y: 10026}
@@ -1418,7 +1566,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 857
-    width: 2002
+    width: 2001
     height: 489
   m_SerializedDataModeController:
     m_DataMode: 0
@@ -1442,7 +1590,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts
+    - Assets/Scripts/Game/UI
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -1452,16 +1600,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Scripts
+  - Assets/Scripts/Game/UI
   m_LastFoldersGridSize: 16
   m_LastProjectPath: C:\Users\mohanad_ugd\Documents\rpo\war-card-game-unity\WarCardGame
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: c6b40000
-    m_LastClickedID: 46278
-    m_ExpandedIDs: 0000000052b4000054b4000056b4000058b400005ab400005cb400005eb4000000ca9a3b
+    m_SelectedIDs: d0b40000
+    m_LastClickedID: 46288
+    m_ExpandedIDs: 0000000052b4000054b4000056b4000058b400005ab400005cb400005eb40000c6b4000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1490,7 +1638,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000052b4000054b4000056b4000058b400005ab400005cb400005eb40000
+    m_ExpandedIDs: 0000000052b4000054b4000056b4000058b400005ab400005cb400005eb4000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1522,18 +1670,18 @@ MonoBehaviour:
     m_ExpandedInstanceIDs: c62300006eef00003a140100d2f0000000ff0000d6fb000016bf00002ec5000018e500009cbf00000651010004c1000060c400001eac0200f052010000000000925c010078b50000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: Card
+      m_OriginalName: Card
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: 43712
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 1
       m_TrimLeadingAndTrailingWhitespace: 0
       m_ClientGUIView: {fileID: 11}
@@ -1571,7 +1719,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 857
-    width: 2002
+    width: 2001
     height: 489
   m_SerializedDataModeController:
     m_DataMode: 0
@@ -1599,9 +1747,9 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 2003
+    x: 2002
     y: 0
-    width: 557
+    width: 558
     height: 1293
   m_MinSize: {x: 276, y: 76}
   m_MaxSize: {x: 4001, y: 4026}
@@ -1631,9 +1779,9 @@ MonoBehaviour:
     m_TextWithWhitespace: "Inspector\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 2003
+    x: 2002
     y: 79
-    width: 556
+    width: 557
     height: 1267
   m_SerializedDataModeController:
     m_DataMode: 0

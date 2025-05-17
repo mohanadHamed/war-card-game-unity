@@ -2,8 +2,7 @@ using Cysharp.Threading.Tasks;
 using System;
 using UnityEngine;
 using UnityEngine.Networking;
-
-using Game;
+using Game.DataTypes;
 
 namespace Network.DeckService
 {

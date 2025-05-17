@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Tests\DeckServiceTests.cs" />
+    <Compile Include="Assets\Scripts\Tests\GameManagerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Scripts\Tests\Tests.asmdef" />

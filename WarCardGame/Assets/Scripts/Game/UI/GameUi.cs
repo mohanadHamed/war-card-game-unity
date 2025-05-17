@@ -1,5 +1,8 @@
 using Common;
 using Cysharp.Threading.Tasks;
+using Game.DataTypes;
+using Game.Interfaces;
+using Game.Logic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -39,11 +42,13 @@ namespace Game.Ui
 
         private GameManager _gameManager;
 
-        private NetworkNotifyResponse _NetworkNotifyReponse;
+        private NetworkNotifyResponse _networkNotifyReponse;
+        private IGameDeckService _gameDeckService;
     
         private async void Start()
         {
-            _gameManager = new GameManager();
+            _gameDeckService = new GameDeckService();
+            _gameManager = new GameManager(_gameDeckService, SfxAudioManager.Instance, GameSettings.Default);
             _gameManager.OnRoundCompleted += UpdateUiAfterRoundCompleted;
             _gameManager.OnPlayerCardReadyAsync += UpdatePlayerCardUi;
             _gameManager.OnBotCardReadyAsync += UpdateBotCardUi;
@@ -63,28 +68,28 @@ namespace Game.Ui
 
         private void QuitButtonClick()
         {
-            _NetworkNotifyReponse = NetworkNotifyResponse.Quit;
+            _networkNotifyReponse = NetworkNotifyResponse.Quit;
         }
 
         private void RetryButtonClick()
         {
-            _NetworkNotifyReponse = NetworkNotifyResponse.Retry;
+            _networkNotifyReponse = NetworkNotifyResponse.Retry;
         }
 
         private async UniTask<NetworkNotifyResponse> ShowNetworkIssueNotify(string message)
         {
-            _NetworkNotifyReponse = NetworkNotifyResponse.None;
+            _networkNotifyReponse = NetworkNotifyResponse.None;
 
             _networkNotifyPanel.SetActive(true);
             _networkNotifyMessage.text = message;
 
-            while (_NetworkNotifyReponse == NetworkNotifyResponse.None)
+            while (_networkNotifyReponse == NetworkNotifyResponse.None)
             {
                 await UniTask.DelayFrame(1);
             }
 
             _networkNotifyPanel.SetActive(false);
-            return _NetworkNotifyReponse;
+            return _networkNotifyReponse;
         }
 
         private async UniTask ResetUi()

@@ -2,7 +2,8 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using Common;
-using Game;
+using Game.DataTypes;
+using Game.Logic;
 
 namespace Result
 {
@@ -25,11 +26,11 @@ namespace Result
 
             if(gameResult == GameResult.PlayerWins )
             {
-                SfxAudioManager.Instance.PlaySfxAudio(SfxAudioManager.Instance.VictoryAudio);
+                SfxAudioManager.Instance.PlayVictory();
             }
             else
             {
-                SfxAudioManager.Instance.PlaySfxAudio(SfxAudioManager.Instance.GameOverLoseAudio);
+                SfxAudioManager.Instance.PlayGameOverLose();
             }
         }
 

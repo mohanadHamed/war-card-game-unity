@@ -5,6 +5,7 @@ using Cysharp.Threading.Tasks;
 using TMPro;
 using DG.Tweening;
 using Network.DeckService;
+using Game.Logic;
 
 namespace Game.Ui
 {
@@ -31,7 +32,7 @@ namespace Game.Ui
 
         private async UniTask<bool> ShowCardWithFlip(string url, string namedValue)
         {
-            SfxAudioManager.Instance.PlaySfxAudio(SfxAudioManager.Instance.CardFlipAudio);
+            SfxAudioManager.Instance.PlayCardFlip();
         
             await FlipOutCard();
 
@@ -43,7 +44,7 @@ namespace Game.Ui
                 await FlipInCard();
                 _cardFallbackText.text = namedValue;
                 _cardFallbackText.gameObject.SetActive(true);
-                Debug.LogError($"Failed to load image from {url}: {request.error}");
+                Debug.LogWarning($"Failed to load image from {url}: {request.error}");
                 return false;
             }
 
@@ -83,7 +84,7 @@ namespace Game.Ui
 
                 if (request.result != UnityWebRequest.Result.Success)
                 {
-                    Debug.LogError($"Failed to download image from {DeckService.CardBackImageURL}: {request.error}");
+                    Debug.LogWarning($"Failed to download image from {DeckService.CardBackImageURL}: {request.error}");
                     return false;
                 }
 

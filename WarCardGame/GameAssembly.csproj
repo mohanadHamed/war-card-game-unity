@@ -61,33 +61,37 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.48f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\Game\Logic\GameDeckService.cs" />
     <Compile Include="Assets\Scripts\Network\DeckService\DataTypes\DrawCardResponse.cs" />
     <Compile Include="Assets\Scripts\Common\SceneLoader.cs" />
-    <Compile Include="Assets\Scripts\Game\GameManager.cs" />
     <Compile Include="Assets\Scripts\Network\DeckService\DataTypes\CardImages.cs" />
+    <Compile Include="Assets\Scripts\Game\Logic\SfxAudioManager.cs" />
     <Compile Include="Assets\Scripts\Network\DeckService\DataTypes\DeckShuffleResponse.cs" />
     <Compile Include="Assets\Scripts\Plugins\Demigiant\DOTween\Modules\DOTweenModuleEPOOutline.cs" />
     <Compile Include="Assets\Scripts\Game\UI\NetworkNotifyResponse.cs" />
-    <Compile Include="Assets\Scripts\Game\SfxAudioManager.cs" />
+    <Compile Include="Assets\Scripts\Game\Interfaces\IGameDeckService.cs" />
     <Compile Include="Assets\Scripts\MainMenu\BgmManager.cs" />
     <Compile Include="Assets\Scripts\GameDataSave\GameSaveData.cs" />
     <Compile Include="Assets\Scripts\Plugins\Demigiant\DOTween\Modules\DOTweenModulePhysics2D.cs" />
-    <Compile Include="Assets\Scripts\Game\RoundResult.cs" />
+    <Compile Include="Assets\Scripts\Game\DataTypes\RoundResult.cs" />
+    <Compile Include="Assets\Scripts\Game\DataTypes\GameSettings.cs" />
     <Compile Include="Assets\Scripts\Game\UI\GameUi.cs" />
-    <Compile Include="Assets\Scripts\Game\GameResult.cs" />
     <Compile Include="Assets\Scripts\Plugins\Demigiant\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
+    <Compile Include="Assets\Scripts\Game\Interfaces\ISfxAudioManager.cs" />
     <Compile Include="Assets\Scripts\Plugins\Demigiant\DOTween\Modules\DOTweenModuleSprite.cs" />
     <Compile Include="Assets\Scripts\Plugins\Demigiant\DOTween\Modules\DOTweenModuleUI.cs" />
     <Compile Include="Assets\Scripts\Result\ResultUi.cs" />
     <Compile Include="Assets\Scripts\Plugins\Demigiant\DOTween\Modules\DOTweenModuleAudio.cs" />
+    <Compile Include="Assets\Scripts\Game\DataTypes\GameResult.cs" />
+    <Compile Include="Assets\Scripts\Game\DataTypes\Card.cs" />
     <Compile Include="Assets\Scripts\Network\DeckService\DeckService.cs" />
     <Compile Include="Assets\Scripts\GameDataSave\SaveSystem.cs" />
     <Compile Include="Assets\Scripts\Plugins\Demigiant\DOTween\Modules\DOTweenModulePhysics.cs" />
     <Compile Include="Assets\Scripts\Network\DeckService\DataTypes\CardData.cs" />
     <Compile Include="Assets\Scripts\Plugins\Demigiant\DOTween\Modules\DOTweenModuleUtils.cs" />
+    <Compile Include="Assets\Scripts\Game\Logic\GameManager.cs" />
     <Compile Include="Assets\Scripts\Game\UI\CardDisplay.cs" />
     <Compile Include="Assets\Scripts\MainMenu\UI\MainMenuController.cs" />
-    <Compile Include="Assets\Scripts\Game\Card.cs" />
     <Compile Include="Assets\Scripts\MainMenu\UI\SettingsController.cs" />
   </ItemGroup>
   <ItemGroup>

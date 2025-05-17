@@ -1,7 +1,7 @@
 
 using System.Collections.Generic;
 
-namespace Game
+namespace Game.DataTypes
 {
     public class Card
     {

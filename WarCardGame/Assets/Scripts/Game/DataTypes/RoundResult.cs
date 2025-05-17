@@ -1,4 +1,4 @@
-namespace Game
+namespace Game.DataTypes
 {
     public enum RoundResult
     {
