@@ -49,6 +49,7 @@ Used to draw and manage playing cards:
 - 📦 Card back image is cached in memory for performance.
 - 🃏 Card display includes DoTween animations with fallback handling.
 - 💾 Game sound settings are persisted using a custom Save System.
+- 🧪 The game build has been tested on both Windows and Android, demonstrating a consistent UI layout across platforms.
 - ✅ Unit tests cover:
   - DeckService
   - GameManager
