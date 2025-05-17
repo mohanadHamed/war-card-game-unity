@@ -13,7 +13,7 @@ A simplified version of the classic *War* card game, developed in Unity as part 
   4. 🏆 First to reach 8 points wins the game.
 - 🟰 If both cards are equal, the round ends in a draw (no points awarded).
 
-## ⚠️ Note on 8-Point Rule
+## ⚠️ Note on the Rule of 8 Rounds
 The original constraint of a **maximum of 8 rounds** has been removed. This is due to the rarity of achieving 8 points within 8 rounds.  
 🔁 The game now continues indefinitely until either side reaches 8 points.
 
