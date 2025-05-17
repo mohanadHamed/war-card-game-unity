@@ -88,16 +88,17 @@ public class GameUi : MonoBehaviour
         return _NetworkNotifyReponse;
     }
 
-    private void ResetUi()
+    private async UniTask ResetUi()
     {
         UpdateScoreBoard(0, 0, 0);
-        SetCardsToBackImage();
+        await SetCardsToBackImage();
+        _drawButton.interactable = true;
     }
 
-    private void SetCardsToBackImage()
+    private async UniTask SetCardsToBackImage()
     {
-        _playerCardDisplay.SetCardToBackImage().Forget();
-        _botCardDisplay.SetCardToBackImage().Forget();
+        await _playerCardDisplay.SetCardToBackImage();
+        await _botCardDisplay.SetCardToBackImage();
     }
 
     private UnityAction DrawButtonClick()
@@ -126,7 +127,7 @@ public class GameUi : MonoBehaviour
 
         if (!isGameOver)
         {
-            SetCardsToBackImage();
+            SetCardsToBackImage().Forget();
             EnableDrawButton();
         }
     }

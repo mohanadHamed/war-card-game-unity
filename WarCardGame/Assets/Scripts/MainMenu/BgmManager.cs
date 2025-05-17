@@ -27,10 +27,12 @@ public class BgmManager : MonoBehaviour
     private void Start()
     {
         _bgmAudioSource = GetComponent<AudioSource>();
+        var bgm = Resources.Load<AudioClip>("Sounds/bgm");
 
         // Play background music
         if (_bgmAudioSource != null)
         {
+            _bgmAudioSource.clip = bgm;
             _bgmAudioSource.loop = true;
             UpdateBgmVolume();
             _bgmAudioSource.Play();

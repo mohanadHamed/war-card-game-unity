@@ -8,10 +8,10 @@ public class GameManager
     public event Func<Card, UniTask> OnPlayerCardReadyAsync;
     public event Func<Card, UniTask> OnBotCardReadyAsync;
     public event Func<string, UniTask<NetworkNotifyResponse>> OnNetworkIssueNotifyAsync;
+    public event Func<UniTask> OnGameStarted;
 
     public event Action<GameResult> OnGameEnded;
     public event Action OnQuitToMainMenu;
-    public event Action OnGameStarted;
     public event Action<RoundResult> OnShowAwardLabels;
     
     public int Round => _round;
@@ -19,7 +19,7 @@ public class GameManager
     //private const int MaxRounds = 8;
     private const int ScoreToWin = 8;
     private const int BotDelayMs = 1000;
-    private const int DelayToLoadGameOverMs = 2000;
+    private const int DelayToLoadGameOverMs = 1000;
     private const int DelayToStartNextRoundMs = 1000;
 
 
@@ -29,7 +29,7 @@ public class GameManager
     private int _botScore;
     private int _round;
 
-    private bool isGameOver => _playerScore == ScoreToWin || _botScore == ScoreToWin;
+    private bool IsGameOver => _playerScore == ScoreToWin || _botScore == ScoreToWin;
 
     public GameManager(DeckService deckService)
     {
@@ -41,7 +41,8 @@ public class GameManager
         await InitDeckAsync();
 
         _playerScore = _botScore = _round = 0;
-        OnGameStarted?.Invoke();
+
+        await OnGameStarted.Invoke();
     }
 
     private async UniTask<bool> InitDeckAsync()
@@ -107,9 +108,9 @@ public class GameManager
         OnShowAwardLabels?.Invoke(result);
 
         await UniTask.Delay(DelayToStartNextRoundMs);
-        OnRoundCompleted?.Invoke(result, _playerScore, _botScore, _round, isGameOver);
+        OnRoundCompleted?.Invoke(result, _playerScore, _botScore, _round, IsGameOver);
 
-        if (isGameOver)
+        if (IsGameOver)
         {
             await GotoGameOver();
         }

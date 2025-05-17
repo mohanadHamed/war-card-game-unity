@@ -4,23 +4,18 @@ public class SfxAudioManager : MonoBehaviour
 {
     public static SfxAudioManager Instance { get; private set; }
 
-    public AudioClip CardFlipAudio => _cardFlipAudio;
-    public AudioClip WinAudio => _winAudio;
-    public AudioClip LoseAudio => _loseAudio;
-    public AudioClip VictoryAudio => _victoryAudio;
-    public AudioClip GameOverLoseAudio => _gameOverLoseAudio;
+    public AudioClip CardFlipAudio { get; private set; }
+    public AudioClip WinAudio { get; private set; }
+    public AudioClip LoseAudio { get; private set; }
+    public AudioClip VictoryAudio { get; private set; }
+    public AudioClip GameOverLoseAudio { get; private set; }
 
 
-    [SerializeField]
-    private AudioClip _cardFlipAudio;
-    [SerializeField]
-    private AudioClip _winAudio;
-    [SerializeField]
-    private AudioClip _loseAudio;
-    [SerializeField]
-    private AudioClip _victoryAudio;
-    [SerializeField]
-    private AudioClip _gameOverLoseAudio;
+    private const string CardFlipAudioFileName = "Sounds/card_flip";
+    private const string WinAudioFileName = "Sounds/win";
+    private const string LoseAudioFileName = "Sounds/lose";
+    private const string VictoryAudioFileName = "Sounds/victory";
+    private const string GameOverLoseAudioFileName = "Sounds/game_over_lose";
 
     private AudioSource _audioSource;
 
@@ -43,6 +38,12 @@ public class SfxAudioManager : MonoBehaviour
     private void Start()
     {
         _audioSource = GetComponent<AudioSource>();
+
+        CardFlipAudio = Resources.Load<AudioClip>(CardFlipAudioFileName);
+        WinAudio = Resources.Load<AudioClip>(WinAudioFileName);
+        LoseAudio = Resources.Load<AudioClip>(LoseAudioFileName);
+        VictoryAudio = Resources.Load<AudioClip>(VictoryAudioFileName);
+        GameOverLoseAudio = Resources.Load<AudioClip>(GameOverLoseAudioFileName);
     }
 
     public void PlaySfxAudio(AudioClip audioClip)
@@ -50,6 +51,7 @@ public class SfxAudioManager : MonoBehaviour
         if (!SaveSystem.Load().SoundEffectsEnabled) return;
 
         _audioSource.clip = audioClip;
+        _audioSource.loop = false;
         _audioSource.Play();
     }
 }
