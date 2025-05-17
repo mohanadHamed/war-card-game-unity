@@ -1,143 +1,148 @@
 using System;
 using Cysharp.Threading.Tasks;
+using Game.Ui;
+using Network.DeckService;
 
-public class GameManager
+namespace Game
 {
-    public event Action<RoundResult, int, int, int, bool> OnRoundCompleted;
-    public event Func<Card, UniTask> OnPlayerCardReadyAsync;
-    public event Func<Card, UniTask> OnBotCardReadyAsync;
-    public event Func<string, UniTask<NetworkNotifyResponse>> OnNetworkIssueNotifyAsync;
-    public event Func<UniTask> OnGameStarted;
+    public class GameManager
+    {
+        public event Action<RoundResult, int, int, int, bool> OnRoundCompleted;
+        public event Func<Card, UniTask> OnPlayerCardReadyAsync;
+        public event Func<Card, UniTask> OnBotCardReadyAsync;
+        public event Func<string, UniTask<NetworkNotifyResponse>> OnNetworkIssueNotifyAsync;
+        public event Func<UniTask> OnGameStarted;
 
-    public event Action<GameResult> OnGameEnded;
-    public event Action OnQuitToMainMenu;
-    public event Action<RoundResult> OnShowAwardLabels;
+        public event Action<GameResult> OnGameEnded;
+        public event Action OnQuitToMainMenu;
+        public event Action<RoundResult> OnShowAwardLabels;
     
-    public int Round => _round;
+        public int Round => _round;
 
-    //private const int MaxRounds = 8;
-    private const int ScoreToWin = 8;
-    private const int BotDelayMs = 1000;
-    private const int DelayToLoadGameOverMs = 1000;
-    private const int DelayToStartNextRoundMs = 1000;
+        //private const int MaxRounds = 8;
+        private const int ScoreToWin = 8;
+        private const int BotDelayMs = 1000;
+        private const int DelayToLoadGameOverMs = 1000;
+        private const int DelayToStartNextRoundMs = 1000;
 
-    private int _playerScore;
-    private int _botScore;
-    private int _round;
+        private int _playerScore;
+        private int _botScore;
+        private int _round;
 
-    private bool IsGameOver => _playerScore == ScoreToWin || _botScore == ScoreToWin;
+        private bool IsGameOver => _playerScore == ScoreToWin || _botScore == ScoreToWin;
 
-    private string _deckId;
-    public async UniTask StartGameAsync()
-    {
-        _deckId = await InitDeckAsync();
-
-        _playerScore = _botScore = _round = 0;
-
-        await OnGameStarted.Invoke();
-    }
-
-    private async UniTask<string> InitDeckAsync()
-    {
-        var deckId = await DeckService.InitDeckAsync();
-        if (string.IsNullOrEmpty(deckId) && OnNetworkIssueNotifyAsync != null)
+        private string _deckId;
+        public async UniTask StartGameAsync()
         {
-            var response = await OnNetworkIssueNotifyAsync("A network connection issue occurred while shuffling deck");
-            if (response == NetworkNotifyResponse.Retry)
+            _deckId = await InitDeckAsync();
+
+            _playerScore = _botScore = _round = 0;
+
+            await OnGameStarted.Invoke();
+        }
+
+        private async UniTask<string> InitDeckAsync()
+        {
+            var deckId = await DeckService.InitDeckAsync();
+            if (string.IsNullOrEmpty(deckId) && OnNetworkIssueNotifyAsync != null)
             {
-                deckId = await InitDeckAsync();
+                var response = await OnNetworkIssueNotifyAsync("A network connection issue occurred while shuffling deck");
+                if (response == NetworkNotifyResponse.Retry)
+                {
+                    deckId = await InitDeckAsync();
+                }
+                else if (response == NetworkNotifyResponse.Quit)
+                {
+                    OnQuitToMainMenu?.Invoke();
+                }
             }
-            else if (response == NetworkNotifyResponse.Quit)
+
+            return deckId;
+        }
+
+        public async UniTask PlayRoundAsync()
+        {
+            if (/*_round >= MaxRounds ||*/ _playerScore == ScoreToWin || _botScore == ScoreToWin)
+                return;
+
+            _round++;
+            var playerCard = await DrawCardAsync();
+            if (OnPlayerCardReadyAsync != null)
             {
-                OnQuitToMainMenu?.Invoke();
+                await OnPlayerCardReadyAsync.Invoke(playerCard);
             }
-        }
 
-        return deckId;
-    }
+            await UniTask.Delay(BotDelayMs);
 
-    public async UniTask PlayRoundAsync()
-    {
-        if (/*_round >= MaxRounds ||*/ _playerScore == ScoreToWin || _botScore == ScoreToWin)
-            return;
+            var botCard = await DrawCardAsync();
 
-        _round++;
-        var playerCard = await DrawCardAsync();
-        if (OnPlayerCardReadyAsync != null)
-        {
-            await OnPlayerCardReadyAsync.Invoke(playerCard);
-        }
-
-        await UniTask.Delay(BotDelayMs);
-
-        var botCard = await DrawCardAsync();
-
-        if (OnBotCardReadyAsync != null)
-        {
-            await OnBotCardReadyAsync.Invoke(botCard);
-        }
-
-
-        RoundResult result;
-
-        if (playerCard.Value > botCard.Value)
-        {
-            _playerScore++;
-            result = RoundResult.PlayerWins;
-            SfxAudioManager.Instance.PlaySfxAudio(SfxAudioManager.Instance.WinAudio);
-        }
-        else if (playerCard.Value < botCard.Value)
-        {
-            _botScore++;
-            result = RoundResult.BotWins;
-            SfxAudioManager.Instance.PlaySfxAudio(SfxAudioManager.Instance.LoseAudio);
-        }
-        else
-        {
-            result = RoundResult.Draw;
-        }
-
-        OnShowAwardLabels?.Invoke(result);
-
-        await UniTask.Delay(DelayToStartNextRoundMs);
-        OnRoundCompleted?.Invoke(result, _playerScore, _botScore, _round, IsGameOver);
-
-        if (IsGameOver)
-        {
-            await GotoGameOver();
-        }
-    }
-
-    private async UniTask<Card> DrawCardAsync()
-    {
-        var playerCard = await DeckService.DrawCardAsync(_deckId);
-        if (playerCard == null && OnNetworkIssueNotifyAsync != null)
-        {
-            var response = await OnNetworkIssueNotifyAsync("A network connection issue occured while drawing a card");
-            if (response == NetworkNotifyResponse.Retry)
+            if (OnBotCardReadyAsync != null)
             {
-                playerCard = await DrawCardAsync();
+                await OnBotCardReadyAsync.Invoke(botCard);
             }
-            else if (response == NetworkNotifyResponse.Quit)
+
+
+            RoundResult result;
+
+            if (playerCard.Value > botCard.Value)
             {
-                OnQuitToMainMenu?.Invoke();
+                _playerScore++;
+                result = RoundResult.PlayerWins;
+                SfxAudioManager.Instance.PlaySfxAudio(SfxAudioManager.Instance.WinAudio);
+            }
+            else if (playerCard.Value < botCard.Value)
+            {
+                _botScore++;
+                result = RoundResult.BotWins;
+                SfxAudioManager.Instance.PlaySfxAudio(SfxAudioManager.Instance.LoseAudio);
+            }
+            else
+            {
+                result = RoundResult.Draw;
+            }
+
+            OnShowAwardLabels?.Invoke(result);
+
+            await UniTask.Delay(DelayToStartNextRoundMs);
+            OnRoundCompleted?.Invoke(result, _playerScore, _botScore, _round, IsGameOver);
+
+            if (IsGameOver)
+            {
+                await GotoGameOver();
             }
         }
 
-        return playerCard;
-    }
+        private async UniTask<Card> DrawCardAsync()
+        {
+            var playerCard = await DeckService.DrawCardAsync(_deckId);
+            if (playerCard == null && OnNetworkIssueNotifyAsync != null)
+            {
+                var response = await OnNetworkIssueNotifyAsync("A network connection issue occured while drawing a card");
+                if (response == NetworkNotifyResponse.Retry)
+                {
+                    playerCard = await DrawCardAsync();
+                }
+                else if (response == NetworkNotifyResponse.Quit)
+                {
+                    OnQuitToMainMenu?.Invoke();
+                }
+            }
 
-    private async UniTask GotoGameOver()
-    {
-        if (_playerScore == ScoreToWin)
-        {
-            await UniTask.Delay(DelayToLoadGameOverMs);
-            OnGameEnded?.Invoke(GameResult.PlayerWins);
+            return playerCard;
         }
-        else if (_botScore == ScoreToWin)
+
+        private async UniTask GotoGameOver()
         {
-            await UniTask.Delay(DelayToLoadGameOverMs);
-            OnGameEnded?.Invoke(GameResult.BotWins);
+            if (_playerScore == ScoreToWin)
+            {
+                await UniTask.Delay(DelayToLoadGameOverMs);
+                OnGameEnded?.Invoke(GameResult.PlayerWins);
+            }
+            else if (_botScore == ScoreToWin)
+            {
+                await UniTask.Delay(DelayToLoadGameOverMs);
+                OnGameEnded?.Invoke(GameResult.BotWins);
+            }
         }
     }
 }

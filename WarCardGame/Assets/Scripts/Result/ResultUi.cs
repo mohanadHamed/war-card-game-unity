@@ -1,36 +1,41 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using Common;
+using Game;
 
-public class ResultUi : MonoBehaviour
+namespace Result
 {
-    [SerializeField]
-    private TextMeshProUGUI _resultText;
-
-    [SerializeField]
-    private Button _mainMenuButton;
-
-    [SerializeField]
-    private SceneLoader _sceneLoader;
-
-    private void Start()
+    public class ResultUi : MonoBehaviour
     {
-        var gameResult = (GameResult)PlayerPrefs.GetInt("GameResult");
-        _resultText.text = gameResult == GameResult.PlayerWins ? "You Win!" : "Bot Wins!";
-        _mainMenuButton.onClick.AddListener(() => BackToMenu());
+        [SerializeField]
+        private TextMeshProUGUI _resultText;
 
-        if(gameResult == GameResult.PlayerWins )
-        {
-            SfxAudioManager.Instance.PlaySfxAudio(SfxAudioManager.Instance.VictoryAudio);
-        }
-        else
-        {
-            SfxAudioManager.Instance.PlaySfxAudio(SfxAudioManager.Instance.GameOverLoseAudio);
-        }
-    }
+        [SerializeField]
+        private Button _mainMenuButton;
 
-    public void BackToMenu()
-    {
-        _sceneLoader.LoadTargetScene(SceneLoader.MainMenuSceneName);
+        [SerializeField]
+        private SceneLoader _sceneLoader;
+
+        private void Start()
+        {
+            var gameResult = (GameResult)PlayerPrefs.GetInt("GameResult");
+            _resultText.text = gameResult == GameResult.PlayerWins ? "You Win!" : "Bot Wins!";
+            _mainMenuButton.onClick.AddListener(() => BackToMenu());
+
+            if(gameResult == GameResult.PlayerWins )
+            {
+                SfxAudioManager.Instance.PlaySfxAudio(SfxAudioManager.Instance.VictoryAudio);
+            }
+            else
+            {
+                SfxAudioManager.Instance.PlaySfxAudio(SfxAudioManager.Instance.GameOverLoseAudio);
+            }
+        }
+
+        public void BackToMenu()
+        {
+            _sceneLoader.LoadTargetScene(SceneLoader.MainMenuSceneName);
+        }
     }
 }

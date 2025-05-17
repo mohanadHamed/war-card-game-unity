@@ -1,7 +1,10 @@
 
-public enum NetworkNotifyResponse
+namespace Game.Ui
 {
-    None,
-    Retry,
-    Quit
+    public enum NetworkNotifyResponse
+    {
+        None,
+        Retry,
+        Quit
+    }
 }

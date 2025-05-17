@@ -61,23 +61,23 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.48f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Game\DeckService\DataTypes\CardData.cs" />
+    <Compile Include="Assets\Scripts\Network\DeckService\DataTypes\DrawCardResponse.cs" />
+    <Compile Include="Assets\Scripts\Common\SceneLoader.cs" />
     <Compile Include="Assets\Scripts\Game\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Network\DeckService\DataTypes\CardImages.cs" />
+    <Compile Include="Assets\Scripts\Network\DeckService\DataTypes\DeckShuffleResponse.cs" />
     <Compile Include="Assets\Scripts\Game\UI\NetworkNotifyResponse.cs" />
     <Compile Include="Assets\Scripts\Game\SfxAudioManager.cs" />
     <Compile Include="Assets\Scripts\MainMenu\BgmManager.cs" />
-    <Compile Include="Assets\Scripts\SaveSystem\GameSaveData.cs" />
+    <Compile Include="Assets\Scripts\GameDataSave\GameSaveData.cs" />
     <Compile Include="Assets\Scripts\Game\RoundResult.cs" />
     <Compile Include="Assets\Scripts\Game\UI\GameUi.cs" />
     <Compile Include="Assets\Scripts\Game\GameResult.cs" />
-    <Compile Include="Assets\Scripts\Game\DeckService\DataTypes\DrawCardResponse.cs" />
-    <Compile Include="Assets\Scripts\Game\DeckService\DeckService.cs" />
     <Compile Include="Assets\Scripts\Result\ResultUi.cs" />
-    <Compile Include="Assets\Scripts\Game\DeckService\DataTypes\DeckShuffleResponse.cs" />
-    <Compile Include="Assets\Scripts\MainMenu\UI\SceneLoader.cs" />
-    <Compile Include="Assets\Scripts\Game\DeckService\DataTypes\CardImages.cs" />
+    <Compile Include="Assets\Scripts\Network\DeckService\DeckService.cs" />
+    <Compile Include="Assets\Scripts\GameDataSave\SaveSystem.cs" />
+    <Compile Include="Assets\Scripts\Network\DeckService\DataTypes\CardData.cs" />
     <Compile Include="Assets\Scripts\Game\UI\CardDisplay.cs" />
-    <Compile Include="Assets\Scripts\SaveSystem\SaveSystem.cs" />
     <Compile Include="Assets\Scripts\MainMenu\UI\MainMenuController.cs" />
     <Compile Include="Assets\Scripts\Game\Card.cs" />
     <Compile Include="Assets\Scripts\MainMenu\UI\SettingsController.cs" />

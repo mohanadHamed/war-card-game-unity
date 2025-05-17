@@ -1,6 +1,9 @@
-public enum RoundResult
+namespace Game
 {
-    PlayerWins,
-    BotWins,
-    Draw
+    public enum RoundResult
+    {
+        PlayerWins,
+        BotWins,
+        Draw
+    }
 }

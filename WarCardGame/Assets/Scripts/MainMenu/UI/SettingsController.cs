@@ -1,35 +1,39 @@
+using GameDataSave;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SettingsController : MonoBehaviour
+namespace MainMenu.Ui
 {
-    [SerializeField]
-    private Toggle _soundMusicToggle;
-    [SerializeField]
-    private Toggle _soundEffectsToggle;
-
-    void Start()
+    public class SettingsController : MonoBehaviour
     {
-        _soundMusicToggle.isOn = SaveSystem.Load().SoundMusicEnabled;
-        _soundEffectsToggle.isOn = SaveSystem.Load().SoundEffectsEnabled;
+        [SerializeField]
+        private Toggle _soundMusicToggle;
+        [SerializeField]
+        private Toggle _soundEffectsToggle;
 
-        _soundMusicToggle.onValueChanged.AddListener(OnMusicToggleChanged);
-        _soundEffectsToggle.onValueChanged.AddListener(OnSoundEffectsToggleChanged);
-    }
+        void Start()
+        {
+            _soundMusicToggle.isOn = SaveSystem.Load().SoundMusicEnabled;
+            _soundEffectsToggle.isOn = SaveSystem.Load().SoundEffectsEnabled;
 
-    public void OnMusicToggleChanged(bool isOn)
-    {
-        var data = SaveSystem.Load();
-        data.SoundMusicEnabled = isOn;
-        SaveSystem.Save(data);
+            _soundMusicToggle.onValueChanged.AddListener(OnMusicToggleChanged);
+            _soundEffectsToggle.onValueChanged.AddListener(OnSoundEffectsToggleChanged);
+        }
 
-        BgmManager.Instance.UpdateBgmVolume();
-    }
+        public void OnMusicToggleChanged(bool isOn)
+        {
+            var data = SaveSystem.Load();
+            data.SoundMusicEnabled = isOn;
+            SaveSystem.Save(data);
 
-    public void OnSoundEffectsToggleChanged(bool isOn)
-    {
-        var data = SaveSystem.Load();
-        data.SoundEffectsEnabled = isOn;
-        SaveSystem.Save(data);
+            BgmManager.Instance.UpdateBgmVolume();
+        }
+
+        public void OnSoundEffectsToggleChanged(bool isOn)
+        {
+            var data = SaveSystem.Load();
+            data.SoundEffectsEnabled = isOn;
+            SaveSystem.Save(data);
+        }
     }
 }

@@ -1,5 +1,8 @@
-public enum GameResult
+namespace Game
 {
-    PlayerWins,
-    BotWins
+    public enum GameResult
+    {
+        PlayerWins,
+        BotWins
+    }
 }
