@@ -5,19 +5,19 @@ using UnityEngine;
 
 public static class SaveSystem
 {
-    static string path => Path.Combine(Application.persistentDataPath, "war_card_game_save.json");
+    private static string SavedGameDataFilePath => Path.Combine(Application.persistentDataPath, "war_card_game_save.json");
 
     public static void Save(GameSaveData data)
     {
         var json = JsonUtility.ToJson(data, true);
 
-        File.WriteAllText(path, json);
+        File.WriteAllText(SavedGameDataFilePath, json);
     }
 
     public static GameSaveData Load()
     {
-        if (!File.Exists(path)) return new GameSaveData();
-        return JsonUtility.FromJson<GameSaveData>(File.ReadAllText(path));
+        if (!File.Exists(SavedGameDataFilePath)) return new GameSaveData();
+        return JsonUtility.FromJson<GameSaveData>(File.ReadAllText(SavedGameDataFilePath));
     }
 
     public static void SaveLeaderboardEntry(LeaderboardEntry entry)

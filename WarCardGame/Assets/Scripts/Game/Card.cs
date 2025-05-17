@@ -1,6 +1,5 @@
 
 using System.Collections.Generic;
-using UnityEngine.InputSystem.Utilities;
 
 public class Card
 {
