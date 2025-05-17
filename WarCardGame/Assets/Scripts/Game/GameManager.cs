@@ -38,10 +38,10 @@ public class GameManager
 
     public async UniTask StartGameAsync()
     {
+        await InitDeckAsync();
+
         _playerScore = _botScore = _round = 0;
         OnGameStarted?.Invoke();
-
-        await InitDeckAsync();
     }
 
     private async UniTask<bool> InitDeckAsync()

@@ -1,0 +1,12 @@
+# ninja log v5
+36	382	7691665722199234	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	9c2aba03accdb21e
+384	532	7691665723712551	C:/Users/mohanad_ugd/Documents/rpo/war-card-game-unity/WarCardGame/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/5j4hx262/obj/arm64-v8a/libswappywrapper.so	7b48f3d27c151b36
+12	1293	7691665731245595	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	2d9cc999ad8596bc
+20	1300	7691665731327240	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	34290cab59ea25b6
+4	1334	7691665731686920	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	7eaacd573916cf2e
+25	1349	7691665731743390	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	679d1df8017a116
+8	1400	7691665732358446	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	2fb6fc407ae67d43
+30	1564	7691665733969920	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	18966e1c6ebe115c
+16	1602	7691665734355317	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	96d8153ed1911c27
+0	1698	7691665735306479	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	162e1a96792450d6
+1698	1784	7691665736246847	C:/Users/mohanad_ugd/Documents/rpo/war-card-game-unity/WarCardGame/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/5j4hx262/obj/arm64-v8a/libgame.so	7d729d198680cb82
