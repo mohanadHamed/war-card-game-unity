@@ -79,6 +79,7 @@ Used to draw and manage playing cards:
       - lose
       - victory
       - win
+    - Sprites/
   - Scenes/
     - MainMenu.unity
     - Game.unity
@@ -123,7 +124,7 @@ Used to draw and manage playing cards:
           - DOTween/
     - Result/
       - ResultUi.cs
-    - Tests/
-      - DeckServiceTests.cs
-      - GameManagerTests.cs
+  - Tests/
+    - DeckServiceTests.cs
+    - GameManagerTests.cs
 
