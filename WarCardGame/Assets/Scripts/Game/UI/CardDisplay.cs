@@ -32,6 +32,8 @@ namespace Game.Ui
 
         private async UniTask<bool> ShowCardWithFlip(string url, string namedValue)
         {
+            if (_cardImage == null) return false;
+
             SfxAudioManager.Instance.PlayCardFlip();
         
             await FlipOutCard();

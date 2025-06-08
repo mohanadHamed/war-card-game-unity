@@ -5,13 +5,19 @@ using Game.Interfaces;
 using Game.Logic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.Events;
+using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.UI;
 
 namespace Game.Ui
 {
     public class GameUi : MonoBehaviour
     {
+        private const string ButtonBackgroundSpriteAddressableKey = "sprites/circle_button";
+        private const string BotSpriteAddressableKey = "sprites/bot";
+        private const string DrawButtonSpriteAddressableKey = "sprites/draw_card";
+
         [SerializeField]
         private CardDisplay _playerCardDisplay;
         [SerializeField]
@@ -22,6 +28,14 @@ namespace Game.Ui
         private TextMeshProUGUI _roundText;
         [SerializeField]
         private Button _drawButton;
+        [SerializeField]
+        private Image _botImageBackground;
+        [SerializeField]
+        private Image _botImageForeground;
+        [SerializeField]
+        private Image _drawButtonImageBackground;
+        [SerializeField]
+        private Image _drawButtonImageForeground;
 
         [SerializeField]
         private SceneLoader _sceneLoader;
@@ -47,6 +61,10 @@ namespace Game.Ui
     
         private async void Start()
         {
+            Addressables.LoadAssetAsync<Sprite>(ButtonBackgroundSpriteAddressableKey).Completed += OnButtonImageBackgroundLoaded;
+            Addressables.LoadAssetAsync<Sprite>(BotSpriteAddressableKey).Completed += OnBotImageLoaded;
+            Addressables.LoadAssetAsync<Sprite>(DrawButtonSpriteAddressableKey).Completed += OnDrawButtonImageLoaded;
+
             _gameDeckService = new GameDeckService();
             _gameManager = new GameManager(_gameDeckService, SfxAudioManager.Instance, GameSettings.Default);
             _gameManager.OnRoundCompleted += UpdateUiAfterRoundCompleted;
@@ -188,5 +206,29 @@ namespace Game.Ui
             _sceneLoader.LoadTargetScene(SceneLoader.MainMenuSceneName);
         }
 
+        private void OnButtonImageBackgroundLoaded(AsyncOperationHandle<Sprite> handle)
+        {
+            if (handle.Status == AsyncOperationStatus.Succeeded)
+            {
+                _botImageBackground.sprite = handle.Result;
+                _drawButtonImageBackground.sprite = handle.Result;
+            }
+        }
+
+        private void OnBotImageLoaded(AsyncOperationHandle<Sprite> handle)
+        {
+            if (handle.Status == AsyncOperationStatus.Succeeded)
+            {
+                _botImageForeground.sprite = handle.Result;
+            }
+        }
+
+        private void OnDrawButtonImageLoaded(AsyncOperationHandle<Sprite> handle)
+        {
+            if (handle.Status == AsyncOperationStatus.Succeeded)
+            {
+                _drawButtonImageForeground.sprite = handle.Result;
+            }
+        }
     }
 }

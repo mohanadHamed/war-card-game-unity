@@ -2157,11 +2157,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05696956342eaf0489615effd42d4713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cardFlipAudio: {fileID: 8300000, guid: fbf0238c3cee5614abf1eb79fbdf8bfb, type: 3}
-  _winAudio: {fileID: 8300000, guid: 463493480d7783845871be2a04d76468, type: 3}
-  _loseAudio: {fileID: 8300000, guid: 7211c516f1fda154b85ef651c3638538, type: 3}
-  _victoryAudio: {fileID: 8300000, guid: f4eaabda1b473a64ea60714f222a0623, type: 3}
-  _gameOverLoseAudio: {fileID: 8300000, guid: 248d8d0c878da8b4f9f603d9c84989b6, type: 3}
 --- !u!1 &1762638622
 GameObject:
   m_ObjectHideFlags: 0
@@ -2271,6 +2266,10 @@ MonoBehaviour:
   _scoreText: {fileID: 1222078339}
   _roundText: {fileID: 1395436451}
   _drawButton: {fileID: 59505419}
+  _botImageBackground: {fileID: 1112387810}
+  _botImageForeground: {fileID: 701221604}
+  _drawButtonImageBackground: {fileID: 59505420}
+  _drawButtonImageForeground: {fileID: 610851360}
   _sceneLoader: {fileID: 1321143016}
   _playerAwardText: {fileID: 773518973}
   _botAwardText: {fileID: 49964961}

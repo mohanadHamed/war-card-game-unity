@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_GUID: 683b6b1457f70964a849ea73f375a30b
+  m_SerializeEntries:
+  - m_GUID: 218d767fe05ba3e4bb42150f4cd4f322
+    m_Address: sounds/bgm
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 248d8d0c878da8b4f9f603d9c84989b6
+    m_Address: sounds/game_over_lose
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2fb21acd887d53f4a9a8dfe11fe35306
+    m_Address: sprites/circle_button
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4a0c6c75cbcfa7c4080f6eb2f20d9b94
+    m_Address: sounds/win
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7211c516f1fda154b85ef651c3638538
+    m_Address: sounds/lose
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a9f0837838370bb4f8a95d5722f75d11
+    m_Address: sprites/draw_card
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f3b1d461dbbbc854e8dc423d1bc2fa54
+    m_Address: sprites/bot
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f4eaabda1b473a64ea60714f222a0623
+    m_Address: sounds/victory
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fbf0238c3cee5614abf1eb79fbdf8bfb
+    m_Address: sounds/card_flip
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 6a41293b355e9b140add5a5dd769a98f, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 59a5b634d1921824aa88f7479c4a4e23, type: 2}
+    - {fileID: 11400000, guid: c13a7e211127d424ea29ee6f0ff7176e, type: 2}

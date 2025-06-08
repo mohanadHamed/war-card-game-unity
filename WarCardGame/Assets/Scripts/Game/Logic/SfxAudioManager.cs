@@ -1,6 +1,8 @@
 using Game.Interfaces;
 using GameDataSave;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Game.Logic
 {
@@ -15,11 +17,11 @@ namespace Game.Logic
         private AudioClip _gameOverLoseAudio;
 
 
-        private const string CardFlipAudioFileName = "Sounds/card_flip";
-        private const string WinAudioFileName = "Sounds/win";
-        private const string LoseAudioFileName = "Sounds/lose";
-        private const string VictoryAudioFileName = "Sounds/victory";
-        private const string GameOverLoseAudioFileName = "Sounds/game_over_lose";
+        private const string CardFlipAudioAddressableKey = "sounds/card_flip";
+        private const string WinAudioAddressableKey = "sounds/win";
+        private const string LoseAudioAddressableKey = "sounds/lose";
+        private const string VictoryAudioAddressableKey = "sounds/victory";
+        private const string GameOverLoseAudioAddressableKey = "sounds/game_over_lose";
 
         private AudioSource _audioSource;
 
@@ -43,11 +45,11 @@ namespace Game.Logic
         {
             _audioSource = GetComponent<AudioSource>();
 
-            _cardFlipAudio = Resources.Load<AudioClip>(CardFlipAudioFileName);
-            _winAudio = Resources.Load<AudioClip>(WinAudioFileName);
-            _loseAudio = Resources.Load<AudioClip>(LoseAudioFileName);
-            _victoryAudio = Resources.Load<AudioClip>(VictoryAudioFileName);
-            _gameOverLoseAudio = Resources.Load<AudioClip>(GameOverLoseAudioFileName);
+            Addressables.LoadAssetAsync<AudioClip>(CardFlipAudioAddressableKey).Completed += OnCardFlipAudioLoaded;
+            Addressables.LoadAssetAsync<AudioClip>(WinAudioAddressableKey).Completed += OnWinAudioLoaded;
+            Addressables.LoadAssetAsync<AudioClip>(LoseAudioAddressableKey).Completed += OnLoseAudioLoaded;
+            Addressables.LoadAssetAsync<AudioClip>(VictoryAudioAddressableKey).Completed += OnVictoryAudioLoaded;
+            Addressables.LoadAssetAsync<AudioClip>(GameOverLoseAudioAddressableKey).Completed += OnGameOverLoseAudioLoaded;
         }
 
         public void PlayWin()
@@ -82,6 +84,46 @@ namespace Game.Logic
             _audioSource.clip = audioClip;
             _audioSource.loop = false;
             _audioSource.Play();
+        }
+
+        private void OnCardFlipAudioLoaded(AsyncOperationHandle<AudioClip> handle)
+        {
+            if (handle.Status == AsyncOperationStatus.Succeeded)
+            {
+                _cardFlipAudio = handle.Result;
+            }
+        }
+
+        private void OnWinAudioLoaded(AsyncOperationHandle<AudioClip> handle)
+        {
+            if (handle.Status == AsyncOperationStatus.Succeeded)
+            {
+                _winAudio = handle.Result;
+            }
+        }
+
+        private void OnLoseAudioLoaded(AsyncOperationHandle<AudioClip> handle)
+        {
+            if (handle.Status == AsyncOperationStatus.Succeeded)
+            {
+                _loseAudio = handle.Result;
+            }
+        }
+
+        private void OnVictoryAudioLoaded(AsyncOperationHandle<AudioClip> handle)
+        {
+            if (handle.Status == AsyncOperationStatus.Succeeded)
+            {
+                _victoryAudio = handle.Result;
+            }
+        }
+
+        private void OnGameOverLoseAudioLoaded(AsyncOperationHandle<AudioClip> handle)
+        {
+            if (handle.Status == AsyncOperationStatus.Succeeded)
+            {
+                _gameOverLoseAudio = handle.Result;
+            }
         }
     }
 }

@@ -1,5 +1,7 @@
 using GameDataSave;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace MainMenu
 {
@@ -28,21 +30,27 @@ namespace MainMenu
         private void Start()
         {
             _bgmAudioSource = GetComponent<AudioSource>();
-            var bgm = Resources.Load<AudioClip>("Sounds/bgm");
-
-            // Play background music
-            if (_bgmAudioSource != null)
-            {
-                _bgmAudioSource.clip = bgm;
-                _bgmAudioSource.loop = true;
-                UpdateBgmVolume();
-                _bgmAudioSource.Play();
-            }
+            Addressables.LoadAssetAsync<AudioClip>("sounds/bgm").Completed += OnBgmAudioLoaded;
         }
 
         public void UpdateBgmVolume()
         {
             _bgmAudioSource.volume = SaveSystem.Load().SoundMusicEnabled ? 1 : 0;
+        }
+
+        void OnBgmAudioLoaded(AsyncOperationHandle<AudioClip> handle)
+        {
+            if (handle.Status == AsyncOperationStatus.Succeeded)
+            {
+                // Play background music
+                if (_bgmAudioSource != null)
+                {
+                    _bgmAudioSource.clip = handle.Result;
+                    _bgmAudioSource.loop = true;
+                    UpdateBgmVolume();
+                    _bgmAudioSource.Play();
+                }
+            }
         }
     }
 }
